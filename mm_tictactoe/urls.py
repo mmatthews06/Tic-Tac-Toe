@@ -17,4 +17,5 @@ urlpatterns = patterns('',
     (r'^home/$', 'mm_tictactoe.tictactoe.views.home'),
     (r'^login/', 'mm_tictactoe.tictactoe.views.login'),
     (r'^game/', 'mm_tictactoe.tictactoe.views.game'),
+    (r'^newGame/', 'mm_tictactoe.tictactoe.views.newGame'),
 )

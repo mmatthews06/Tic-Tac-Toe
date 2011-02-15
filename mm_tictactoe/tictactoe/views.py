@@ -29,6 +29,17 @@ def login(request):
     request.session['game'] = game
     return HttpResponseRedirect('/game/')
 
+def newGame(request):
+    if 'player' not in request.session:
+        return HttpResponseRedirect('/home/')
+
+    player = request.session['player']
+    game = Game(player1=player)
+    game.nextTurn()
+    game.save()
+    request.session['game'] = game
+    return HttpResponseRedirect('/game/')
+
 def game(request):
     game = request.session['game']
     player = request.session['player']
