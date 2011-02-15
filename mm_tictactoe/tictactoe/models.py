@@ -228,7 +228,7 @@ class Game(models.Model):
         # Try to fork for this player:
         forkPositions = self.forkablePositions(player)
         if forkPositions:
-            self.board[forkPos] = player
+            self.board[forkPositions[0]] = player
             return True
 
         # Try to block a fork from the other player. That is, try to create
