@@ -32,6 +32,7 @@ def login(request):
 def game(request):
     game = request.session['game']
     player = request.session['player']
+    player.lastActive = datetime.now()
 
     endGame = False
     if request.method == 'POST':
@@ -45,15 +46,24 @@ def game(request):
         game.board[index] = playerChar
 
         if game.checkWinner(playerChar):
-            messages.add_message(request, messages.INFO, 'You won!')
+            game.winner = player
+            player.wins += 1
             endGame = True
+            messages.add_message(request, messages.INFO,
+                    'You won!  Record: %s - %s' % (player.wins, player.losses))
 
         if game.nextTurn(otherPlayerChar):
-            messages.add_message(request, messages.INFO, 'You lost!')
+            game.winner = game.player2
+            player.losses += 1
             endGame = True
+            messages.add_message(request, messages.INFO,
+                    'You lost!  Record: %s - %s' % (player.wins, player.losses))
 
         game.save()
         request.session['game'] = game
+
+    player.save()
+    request.session['player'] = player
     return render_to_response('game.html',
             {'game': game, 'endGame': endGame},
             context_instance=RequestContext(request))
