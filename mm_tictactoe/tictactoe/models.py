@@ -3,6 +3,11 @@ from datetime import datetime
 from random import randrange
 
 class ArrayField(models.CommaSeparatedIntegerField):
+    """
+    A simple field that makes an actual array out of the comma-separated
+    integers.  This is a custom class created by me.  There may be a better
+    way to do this, though...
+    """
     __metaclass__ = models.SubfieldBase
 
     def to_python(self, value):
@@ -20,11 +25,10 @@ class Player(models.Model):
     name = models.TextField(null=False,unique=True)
     wins = models.IntegerField(default=0)
     losses = models.IntegerField(default=0)
-    lastLogin = models.DateTimeField('Last Login',default=datetime.now())
+    lastActive = models.DateTimeField('Last Active',default=datetime.now())
 
     def __unicode__(self):
         return self.name
-
 
 class Game(models.Model):
     EMPTY = 0                   # empty board position specifier
