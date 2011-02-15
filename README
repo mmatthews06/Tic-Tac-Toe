@@ -1,3 +1,55 @@
+Michael Matthews -- Tic Tac Toe Submission
+
+This has a very basic GUI, but a decent set of features that make it a little more extensible, for later.  I'd planned to make it a two-player game (no computers), thus some of the "extra" functionality.  There is very simple support for "player" names, for example, though I did not add passwords, or make it a real "account" system because I thought that would be a little tedious to get going upon evaluation.  I left the Django admin page turned off intentionally, just because they're not real players.
+
+The Tic Tac Toe game itself is actually persisted in a database between calls, as are the "Players" that "login."  For the game itself, I went with an array of integers to represent the game board.  I felt like this was unique, and would allow for speedier algorithm execution, and potentially more compact code, if not less obscure.  For example, a quick performance test suggests that finding a potential winning Tic Tac Toe position like this:
+  t = [1,1,0]   # where 1 is 'x', and 0 is the empty spot that gets the win
+  sum(t) == 2
+
+Éis quicker than testing like this:
+ t = ['x', 'x', None]
+ t == ['x', 'x', None] or t == [None, 'x', 'x'] or t == ['x', None, 'x']
+
+The first example seems more compact, as well.  There is probably a better solution than either of these, but I was happy with how it worked out.
+
+TODO:
+Note, if I get time I will spruce up the graphics, and add more unit testing and documentation.  I could make it a two-player game as well, but that would be a lower priority than the other items.
+
+EXTRA:
+The quick comparison tests that I ran:
+i = 100000
+L = [['x','x',None],[None,'x', 'x'],['x','o',None],['o','o', None]]
+wins = 0
+while i:
+    for l in L:
+        if l == ['x','x',None] or l == [None,'x','x'] or l == ['x',None,'x']:
+            wins += 1
+    i -= 1
+print wins
+
+> time python chars.py 
+200000
+real	0m0.276s
+user	0m0.265s
+sys	0m0.010s
+
+L = [[1,1,0],[0,1,1],[1,0,0],[0,0,1]]
+wins = 0
+while i:
+    for l in L:
+        if sum(l) == 2:
+            wins += 1
+    i -= 1
+print wins
+
+> time python nums.py 
+200000
+real	0m0.185s
+user	0m0.173s
+sys	0m0.010s
+
+It appears that the number system is faster than the crude character win test that I came up with.
+
 Intructions:
 1. Fork this repo on github.
 2. Create an app that can interactively play the game of Tic Tac Toe against another player and never lose.
