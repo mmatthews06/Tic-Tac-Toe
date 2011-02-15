@@ -14,12 +14,13 @@
         <tr>
     {% endif %}
     {% if index == game.X %}
-        <td>X</td>
+        <td> X </td>
     {% else %} {% if index == game.O %}
-        <td>O</td>
-    {% else %}
+        <td> O </td>
+        {% else %} {% if endGame %}<td>__</td>
+        {% else %}
         <td><input type="submit" name="index" value={{ forloop.counter0 }}></td>
-    {% endif %} {% endif %}
+    {% endif %} {% endif %} {% endif %}
     {% endfor %}
         </tr>
     </table>
