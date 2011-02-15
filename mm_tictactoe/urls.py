@@ -13,4 +13,8 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     # (r'^admin/', include(admin.site.urls)),
+    (r'^$', 'mm_tictactoe.tictactoe.views.home'),
+    (r'^home/$', 'mm_tictactoe.tictactoe.views.home'),
+    (r'^login/', 'mm_tictactoe.tictactoe.views.login'),
+    (r'^game/', 'mm_tictactoe.tictactoe.views.game'),
 )
