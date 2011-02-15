@@ -1,0 +1,29 @@
+{% extends "site.html" %}
+
+{% block pagetitle %}Game{% endblock %}
+{% block title %}Game{% endblock %}
+{% block primary %}
+
+<form method="post" action="/game/">
+{% csrf_token %}
+    <table border="1">
+        <tr>
+    {% for index in game.board %}
+    {% if forloop.counter0|divisibleby:3 %}
+        </tr>
+        <tr>
+    {% endif %}
+    {% if index == game.X %}
+        <td>X</td>
+    {% else %} {% if index == game.O %}
+        <td>O</td>
+    {% else %}
+        <td><input type="submit" name="index" value={{ forloop.counter0 }}></td>
+    {% endif %} {% endif %}
+    {% endfor %}
+        </tr>
+    </table>
+</form>
+
+{% endblock %}
+
