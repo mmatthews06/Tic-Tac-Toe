@@ -25,6 +25,7 @@ class Player(models.Model):
     name = models.TextField(null=False,unique=True)
     wins = models.IntegerField(default=0)
     losses = models.IntegerField(default=0)
+    draws = models.IntegerField(default=0)
     lastActive = models.DateTimeField('Last Active',default=datetime.now())
 
     def __unicode__(self):
@@ -86,13 +87,21 @@ class Game(models.Model):
     def diag2(self):
         return self.lineVals(self.DIAG2)
 
+    def playerTurn(self, player, index):
+        """
+        Handle a non-computer player turn.
+        """
+        self.turn += 1
+        self.board[index] = player
+
     def nextTurn(self, player=X):
         """
         A method to make the computer's move, or sugget a move to a user.
         It returns True if this move resulted in a win, False otherwise.
 
         Note, this method was written to work generically for any "player,"
-        specified by its character.
+        as specified by that player's X/O character.  However, it does actually
+        change the board, so it can't just suggest a move.
 
         Win or draw with the following strategry (courtesy of Wikipedia):
 

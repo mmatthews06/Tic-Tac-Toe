@@ -43,21 +43,30 @@ def game(request):
             playerChar = game.X
             otherPlayerChar = game.O
 
-        game.board[index] = playerChar
+        game.playerTurn(playerChar, index)
 
         if game.checkWinner(playerChar):
             game.winner = player
             player.wins += 1
             endGame = True
             messages.add_message(request, messages.INFO,
-                    'You won!  Record: %s - %s' % (player.wins, player.losses))
+                    'You won!  Record: %s - %s - %s' %\
+                            (player.wins, player.losses, player.draws))
 
         if game.nextTurn(otherPlayerChar):
             game.winner = game.player2
             player.losses += 1
             endGame = True
             messages.add_message(request, messages.INFO,
-                    'You lost!  Record: %s - %s' % (player.wins, player.losses))
+                    'You lost!  Record: %s - %s - %s' %\
+                            (player.wins, player.losses, player.draws))
+
+        if game.turn >= 9:
+            endGame = True
+            player.draws += 1
+            messages.add_message(request, messages.INFO,
+                    'Draw!  Record: %s - %s - %s' %\
+                            (player.wins, player.losses, player.draws))
 
         game.save()
         request.session['game'] = game
