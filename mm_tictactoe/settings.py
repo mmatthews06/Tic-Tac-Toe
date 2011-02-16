@@ -52,6 +52,9 @@ MEDIA_ROOT = ''
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
 MEDIA_URL = ''
 
+STATIC_URL = 'http://localhost:8000/site_media'
+STATIC_ROOT = '/Users/***/coxmedia/Tic-Tac-Toe/mm_tictactoe/site_media'
+
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".

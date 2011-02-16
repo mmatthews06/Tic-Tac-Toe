@@ -14,12 +14,21 @@
         <tr>
     {% endif %}
     {% if index == game.X %}
-        <td> X </td>
+        <td>
+            <img src="{{ STATIC_URL }}/site_media/x.png" height="90" width="90" name="X">
+        </td>
     {% else %} {% if index == game.O %}
-        <td> O </td>
-        {% else %} {% if endGame %}<td>__</td>
-        {% else %}
-        <td><input type="submit" name="index" value={{ forloop.counter0 }}></td>
+        <td>
+            <img src="{{ STATIC_URL}}/site_media/o.png" height="90" width="90" name="X">
+        </td>
+    {% else %} {% if endGame %}
+        <td> 
+            <img src="{{ STATIC_URL}}/site_media/blank.png" height="90" width="90" name="X">
+        </td>
+    {% else %}
+        <td>
+            <input type="image" src="{{ STATIC_URL}}/site_media/blank.png" height="90" width="90" name="index" value={{ forloop.counter0 }}>
+        </td>
     {% endif %} {% endif %} {% endif %}
     {% endfor %}
         </tr>
