@@ -87,7 +87,15 @@ class TicTacToeTest(TestCase):
 
     def test_blockWin(self):
         """
-        Block a potential win before a fork.
+        Block a potential win before a fork.  Starting board:
+            O _ X
+            _ X _
+            O _ _
+
+        The computer should block the potential win by putting an X
+        between the two O's.  There is a potential fork by placing an X
+        in the empty spot to the right of the X, but that would mean the
+        O's could win.
         """
 
         startingBoard = [Game.O, Game.EMPTY, Game.X,
