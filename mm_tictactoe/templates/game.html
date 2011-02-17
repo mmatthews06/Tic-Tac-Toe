@@ -4,6 +4,7 @@
 {% block title %}Game{% endblock %}
 {% block primary %}
 
+<div align="center">
 <form method="post" action="/game/">
 {% csrf_token %}
     <table border="1">
@@ -34,6 +35,7 @@
         </tr>
     </table>
 </form>
+</div>
 
 {% endblock %}
 
