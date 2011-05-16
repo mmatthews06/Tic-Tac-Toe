@@ -48,3 +48,29 @@ function gameMoveResponse(res, status) {
     $gameBoard.empty();
     $gameBoard.append(gameSquares.join(''));
 }
+
+function navClicked(e) {
+    var navItem;
+    if (!e) var e = window.event;
+    if (e.target) navItem = e.target;
+    else if (e.srcElement) navItem = e.srcElement;
+    
+    // FIXME: This is a pretty hacky way to get a click
+    // background changed, but works well enough for now.
+    // Need to clean up the nav bar (move New Game off),
+    // and make this a real selection.
+    navItem.setAttribute('class', 'selected');
+                
+    switch (navItem.id) {
+        case 'navHome':
+            window.location.href = "/home/";
+            break;
+        case 'navNewGame':
+            window.location.href = "/newGame/";
+            break;
+        case 'navCurGame':
+            window.location.href = "/game/";
+            break;
+    }
+    
+}
