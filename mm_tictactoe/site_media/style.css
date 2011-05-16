@@ -19,7 +19,7 @@ header {
             #367f3f,
             #4fb34b, 
             #367f3f);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1B8EBA', endColorstr='#47b9dd');
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#367f3f', endColorstr='#4fb34b');
     
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -52,7 +52,7 @@ nav {
             #54b850, 
             #6fce93,
             #54b850);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#aaaaaa', endColorstr='#07476a');
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#54b850', endColorstr='#6fce93');
 }
 
 nav ul {
