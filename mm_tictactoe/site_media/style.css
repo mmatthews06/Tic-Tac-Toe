@@ -87,17 +87,17 @@ nav ul li {
             linear, 
             0% 0%, 
             0% 100%, 
-            from(#07476a), 
-            to(#07476a), 
-            color-stop(.5,#1B8EBA)
+            from(#367f3f), 
+            to(#367f3f), 
+            color-stop(.5,#4fb34b)
         );
 
     background-image: url(/site_media/Actions-go-home-icon.png),
         -moz-linear-gradient(
             top, 
-            #07476a,
-            #1B8EBA, 
-            #07476a
+            #367f3f,
+            #4fb34b, 
+            #367f3f
         );
 }
 
@@ -111,17 +111,17 @@ nav ul li {
             linear, 
             0% 0%, 
             0% 100%, 
-            from(#07476a), 
-            to(#07476a), 
-            color-stop(.5,#1B8EBA)
+            from(#367f3f), 
+            to(#367f3f), 
+            color-stop(.5,#4fb34b)
         );
 
     background-image: url(/site_media/Actions-games-solve-icon.png),
         -moz-linear-gradient(
             top, 
-            #07476a,
-            #1B8EBA, 
-            #07476a
+            #367f3f,
+            #4fb34b, 
+            #367f3f
         );
 }
 
@@ -135,17 +135,17 @@ nav ul li {
             linear, 
             0% 0%, 
             0% 100%, 
-            from(#07476a), 
-            to(#07476a), 
-            color-stop(.5,#1B8EBA)
+            from(#367f3f), 
+            to(#367f3f), 
+            color-stop(.5,#4fb34b)
         );
 
     background-image: url(/site_media/black-chess-icon.png),
         -moz-linear-gradient(
             top, 
-            #07476a,
-            #1B8EBA, 
-            #07476a
+            #367f3f,
+            #4fb34b, 
+            #367f3f
         );
 }
 
