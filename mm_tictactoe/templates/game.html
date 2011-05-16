@@ -14,20 +14,20 @@
     {% endif %}
     {% if index == game.X %}
         <td>
-            <div class="x" />
+            <div class="x"></div>
         </td>
     {% else %} {% if index == game.O %}
         <td>
-            <div class="o" />
+            <div class="o"></div>
         </td>
     {% else %} {% if endGame %}
         <td> 
-            <div class="blank" />
+            <div class="blank"></div>
         </td>
     {% else %}
         <td>
             <!--<input type="submit" class="blank" name="gridIndex" value="{{ forloop.counter0 }}">-->
-            <div class="blank" onclick="gameMove(event)" id="{{ forloop.counter0 }}">
+            <div class="blank" onclick="gameMove(event)" id="{{ forloop.counter0 }}"></div>
         </td>
     {% endif %} {% endif %} {% endif %}
     {% endfor %}

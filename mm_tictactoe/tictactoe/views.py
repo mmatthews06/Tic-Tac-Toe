@@ -133,10 +133,7 @@ def gameJAX(request):
 
     player.save()
     request.session['player'] = player
-    serialized = simplejson.dumps(game.board)
+    response = { 'board': game.board, 'ended': endGame }
+    serialized = simplejson.dumps(response)
     return HttpResponse(serialized, mimetype="application/json")
-
-    return render_to_response('game.html',
-            {'game': game, 'endGame': endGame},
-            context_instance=RequestContext(request))
 
