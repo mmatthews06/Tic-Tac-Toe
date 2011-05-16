@@ -1,0 +1,18 @@
+div.x {
+    background: url('/site_media/x.png');
+    height: 90px;
+    width: 90px;
+}
+
+div.o {
+    background: url('/site_media/o.png');
+    height: 90px;
+    width: 90px;
+}
+
+input.blank, div.blank {
+    background: url('/site_media/blank.png');
+    height: 90px;
+    width: 90px;
+}
+
