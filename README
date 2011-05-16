@@ -1,6 +1,8 @@
 Michael Matthews -- Tic Tac Toe Submission
 
-This has a very basic GUI, but a decent set of features that make it a little more extensible, for later.  I'd planned to make it a two-player game (no computers), thus some of the "extra" functionality.  There is very simple support for "player" names, for example, though I did not add passwords, or make it a real "account" system because I thought that would be a little tedious to get going upon evaluation.  I left the Django admin page turned off intentionally, just because they're not real players.
+
+
+Some features are there to make it a two-player game (no computers).  There is very simple support for "player" names, for example, though I did not add passwords, or make it a real "account" system because I thought that would be a little tedious for the evaluator(s).  I left the Django admin page turned off intentionally, just because there isn't much to administer.
 
 The Tic Tac Toe game itself is actually persisted in a database between calls, as are the "Players" that "login."  For the game itself, I went with an array of integers to represent the game board.  I felt like this was unique, and would allow for speedier algorithm execution, and potentially more compact code, if not less obscure.  For example, a quick performance test suggests that finding a potential winning Tic Tac Toe position like this:
   t = [1,1,0]   # where 1 is 'x', and 0 is the empty spot that gets the win

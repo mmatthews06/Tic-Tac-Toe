@@ -121,7 +121,7 @@ def gameJAX(request):
                     'You lost!  Record: %s - %s - %s' %\
                             (player.wins, player.losses, player.draws))
 
-        if game.turn >= 9:
+        if not endGame and game.turn >= 9:
             endGame = True
             player.draws += 1
             messages.add_message(request, messages.INFO,
