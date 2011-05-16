@@ -1,4 +1,11 @@
 
+var BLANK_PIECE = 0;
+var X_PIECE = 1;
+var O_PIECE = 4;
+var END_WIN = 0;
+var END_LOSS = 1;
+var END_DRAW = 2;
+
 function gameMove(e) {
     var targ;
     if (!e) var e = window.event;
@@ -31,9 +38,9 @@ function gameMoveResponse(res, status) {
             gameSquares.push('</tr>')
             gameSquares.push('<tr>')
         }
-        if (board[i] == 1)
+        if (board[i] == X_PIECE)
             gameSquares.push('<td><div class="x"></div></td>');
-        else if (board[i] == 4)
+        else if (board[i] == O_PIECE)
             gameSquares.push('<td><div class="o"></div></td>');
         else {
             tdString = '<td><div id="' + i + '" class="blank"';
@@ -48,10 +55,27 @@ function gameMoveResponse(res, status) {
     $gameBoard.empty();
     $gameBoard.append(gameSquares.join(''));
     if (ended) {
+        var endMessage = '<p>';
         $('section#gameSection').removeClass('active');
         $('section#gameSection').addClass('obscured');
         $('section#gameEndSection').addClass('active');
-        $('#gameEndMessage').text(res.endMessage);
+        switch (res.endState) {
+            case END_WIN:
+                endMessage += "You Win!<br />";
+                break;
+            case END_LOSS:
+                endMessage += "You Lose!<br />";
+                break;
+            case END_DRAW:
+                endMessage += "It's a draw!<br />";
+                break;
+        }
+        endMessage += "Record:<br />"
+        endMessage += "Wins: " + res.wins;
+        endMessage += "  Losses: " + res.losses; 
+        endMessage += "  Draws: " + res.draws;
+        endMessage += "</p>"
+        $('#gameEndMessage').html(endMessage);
     }
 }
 

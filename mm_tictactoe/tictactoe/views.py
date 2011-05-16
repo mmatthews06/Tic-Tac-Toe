@@ -9,6 +9,11 @@ from django.utils import simplejson
 
 from models import Player, Game
 
+
+END_WIN = 0
+END_LOSS = 1
+END_DRAW = 2
+
 def home(request):
     return render_to_response('home.html',
             context_instance=RequestContext(request))
@@ -95,7 +100,7 @@ def gameJAX(request):
     player.lastActive = datetime.now()
 
     endGame = False
-    endMessage = ''
+    endState = None
     if request.method == 'POST':
         index = int(request.POST['gridIndex'])
         playerChar = game.O
@@ -110,30 +115,31 @@ def gameJAX(request):
             game.winner = player
             player.wins += 1
             endGame = True
-            endMessage = 'You won!  Record: %s - %s - %s' %\
-                            (player.wins, player.losses, player.draws)
+            endState = END_WIN
 
         if game.nextTurn(otherPlayerChar):
             game.winner = game.player2
             player.losses += 1
             endGame = True
-            endMessage = 'You lost!  Record: %s - %s - %s' %\
-                            (player.wins, player.losses, player.draws)
+            endState = END_LOSS
 
         if not endGame and game.turn >= 9:
             endGame = True
             player.draws += 1
-            endMessage = 'Draw!  Record: %s - %s - %s' %\
-                            (player.wins, player.losses, player.draws)
+            endState = END_DRAW
 
         game.save()
         request.session['game'] = game
 
     player.save()
     request.session['player'] = player
+
     response = { 'board': game.board,
                  'ended': endGame,
-                 'endMessage': endMessage}
+                 'endState': endState,
+                 'wins': player.wins,
+                 'losses': player.losses,
+                 'draws': player.draws}
     serialized = simplejson.dumps(response)
     return HttpResponse(serialized, mimetype="application/json")
 
