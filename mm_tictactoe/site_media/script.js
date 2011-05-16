@@ -47,6 +47,12 @@ function gameMoveResponse(res, status) {
     var $gameBoard = $('#gameBoard');
     $gameBoard.empty();
     $gameBoard.append(gameSquares.join(''));
+    if (ended) {
+        $('section#gameSection').removeClass('active');
+        $('section#gameSection').addClass('obscured');
+        $('section#gameEndSection').addClass('active');
+        $('#gameEndMessage').text(res.endMessage);
+    }
 }
 
 function navClicked(e) {

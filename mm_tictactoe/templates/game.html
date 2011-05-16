@@ -3,8 +3,8 @@
 {% block pagetitle %}Game{% endblock %}
 {% block primary %}
 
-    <!--<form method="post" action="/game/">-->
     {% csrf_token %}
+    <section id="gameSection" class="active">
     <table id="gameBoard">
         <tr>
     {% for index in game.board %}
@@ -26,14 +26,16 @@
         </td>
     {% else %}
         <td>
-            <!--<input type="submit" class="blank" name="gridIndex" value="{{ forloop.counter0 }}">-->
             <div class="blank" onclick="gameMove(event)" id="{{ forloop.counter0 }}"></div>
         </td>
     {% endif %} {% endif %} {% endif %}
     {% endfor %}
         </tr>
     </table>
-    <!--</form>-->
+    </section>
+    <section id="gameEndSection" class="">
+        <div id="gameEndMessage">TEST!</div>
+    </section>
 
 {% endblock %}
 

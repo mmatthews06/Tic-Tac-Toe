@@ -15,14 +15,6 @@
           <li id="navCurGame" onclick="navClicked(event)"></li>
       </ul>
     </nav>
-    {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-    
     <div id="content">
       <div id="primary">
         <h1>{% block title %}{% endblock %}</h1>

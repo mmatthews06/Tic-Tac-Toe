@@ -149,9 +149,50 @@ nav ul li {
         );
 }
 
-table#gameBoard {
+section#gameSection {
+}
+
+section#gameSection table#gameBoard {
     margin-left: auto;
     margin-right: auto;
+}
+
+section {
+    -webkit-transition-property: opacity;
+    -webkit-transition-delay: 0.25s;
+    -webkit-transition-duration: 1.0s;
+    -webkit-transition-timing-function: ease;
+    
+    -moz-transition-property: opacity;
+    -moz-transition-delay: 0.25s;
+    -moz-transition-duration: 1.0s;
+    -moz-transition-timing-function: ease;
+    
+    transition-property: opacity;
+    transition-delay: 0.25s;
+    transition-duration: 1.0s;
+    transition-timing-function: ease;
+    
+    z-index: 0;
+    position: absolute;
+    width: 100%;
+    display: block;
+    opacity: 0;
+}
+
+section.obscured {
+    z-index: 100;
+    opacity: 0.25;
+}
+
+section.active {
+    z-index: 100;
+    opacity: 1;
+}
+
+#gameEndMessage {
+    text-align:center;
+
 }
 
 table#gameBoard tr td {

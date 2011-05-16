@@ -95,6 +95,7 @@ def gameJAX(request):
     player.lastActive = datetime.now()
 
     endGame = False
+    endMessage = ''
     if request.method == 'POST':
         index = int(request.POST['gridIndex'])
         playerChar = game.O
@@ -109,31 +110,30 @@ def gameJAX(request):
             game.winner = player
             player.wins += 1
             endGame = True
-            messages.add_message(request, messages.INFO,
-                    'You won!  Record: %s - %s - %s' %\
-                            (player.wins, player.losses, player.draws))
+            endMessage = 'You won!  Record: %s - %s - %s' %\
+                            (player.wins, player.losses, player.draws)
 
         if game.nextTurn(otherPlayerChar):
             game.winner = game.player2
             player.losses += 1
             endGame = True
-            messages.add_message(request, messages.INFO,
-                    'You lost!  Record: %s - %s - %s' %\
-                            (player.wins, player.losses, player.draws))
+            endMessage = 'You lost!  Record: %s - %s - %s' %\
+                            (player.wins, player.losses, player.draws)
 
         if not endGame and game.turn >= 9:
             endGame = True
             player.draws += 1
-            messages.add_message(request, messages.INFO,
-                    'Draw!  Record: %s - %s - %s' %\
-                            (player.wins, player.losses, player.draws))
+            endMessage = 'Draw!  Record: %s - %s - %s' %\
+                            (player.wins, player.losses, player.draws)
 
         game.save()
         request.session['game'] = game
 
     player.save()
     request.session['player'] = player
-    response = { 'board': game.board, 'ended': endGame }
+    response = { 'board': game.board,
+                 'ended': endGame,
+                 'endMessage': endMessage}
     serialized = simplejson.dumps(response)
     return HttpResponse(serialized, mimetype="application/json")
 
