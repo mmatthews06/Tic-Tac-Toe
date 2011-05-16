@@ -75,6 +75,7 @@ function gameMoveResponse(res, status) {
         endMessage += "  Losses: " + res.losses; 
         endMessage += "  Draws: " + res.draws;
         endMessage += "</p>"
+        endMessage += "<a href='/newGame/'>New Game?</a>"
         $('#gameEndMessage').html(endMessage);
     }
 }
