@@ -1,7 +1,11 @@
 # Django settings for mm_tictactoe project.
+import os
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+
+# Custom added property to use to build later paths
+ROOT_PATH = os.path.dirname(__file__)
 
 ADMINS = (
     # ('Your Name', 'your_email@domain.com'),
@@ -12,7 +16,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '../../database/mm_tictactoe.sqlite3',                      # Or path to database file if using sqlite3.
+        'NAME': os.path.join(ROOT_PATH, 'mm_tictactoe.sqlite3'),  # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -45,15 +49,12 @@ USE_L10N = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = ''
+MEDIA_ROOT = os.path.join(ROOT_PATH, 'site_media')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
-MEDIA_URL = ''
-
-STATIC_URL = 'http://localhost:8000/site_media'
-STATIC_ROOT = '/Users/***/coxmedia/Tic-Tac-Toe/mm_tictactoe/site_media'
+MEDIA_URL = 'http://localhost:8000/site_media'
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
@@ -84,7 +85,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    '/Users/***/coxmedia/Tic-Tac-Toe/mm_tictactoe/templates',
+    os.path.join(ROOT_PATH, 'templates')
 )
 
 INSTALLED_APPS = (

@@ -1,41 +1,39 @@
 {% extends "site.html" %}
 
 {% block pagetitle %}Game{% endblock %}
-{% block title %}Game{% endblock %}
 {% block primary %}
 
-<div align="center">
-<form method="post" action="/game/">
-{% csrf_token %}
-    <table border="1">
+    <!--<form method="post" action="/game/">-->
+    {% csrf_token %}
+    <table id="gameBoard">
         <tr>
     {% for index in game.board %}
-    {% if forloop.counter0|divisibleby:3 %}
+    {% if forloop.counter0 > 0 and forloop.counter0|divisibleby:3 %}
         </tr>
         <tr>
     {% endif %}
     {% if index == game.X %}
         <td>
-            <img src="{{ STATIC_URL }}/site_media/x.png" height="90" width="90" name="X">
+            <div class="x" />
         </td>
     {% else %} {% if index == game.O %}
         <td>
-            <img src="{{ STATIC_URL}}/site_media/o.png" height="90" width="90" name="X">
+            <div class="o" />
         </td>
     {% else %} {% if endGame %}
         <td> 
-            <img src="{{ STATIC_URL}}/site_media/blank.png" height="90" width="90" name="X">
+            <div class="blank" />
         </td>
     {% else %}
         <td>
-            <input type="image" src="{{ STATIC_URL}}/site_media/blank.png" height="90" width="90" name="index" value={{ forloop.counter0 }}>
+            <!--<input type="submit" class="blank" name="gridIndex" value="{{ forloop.counter0 }}">-->
+            <div class="blank" onclick="gameMove(event)" id="{{ forloop.counter0 }}">
         </td>
     {% endif %} {% endif %} {% endif %}
     {% endfor %}
         </tr>
     </table>
-</form>
-</div>
+    <!--</form>-->
 
 {% endblock %}
 
