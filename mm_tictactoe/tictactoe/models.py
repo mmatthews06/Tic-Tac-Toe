@@ -32,6 +32,10 @@ class Player(models.Model):
         return self.name
 
 class Game(models.Model):
+    '''
+    Please see the README for a little bit of an explanation for why this
+    is probably tricky to follow.
+    '''
     EMPTY = 0                   # empty board position specifier
     X = 1                       # "player" X's integer to put in the board
     O = 4                       # "player" O's integer to put in the board
