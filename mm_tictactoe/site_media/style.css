@@ -43,9 +43,9 @@ nav {
             linear, 
             0% 0%, 
             0% 100%, 
-            from(#47b9dd),
-            to(#47b9dd),
-            color-stop(0.5,#8ad3e8)
+            from(#54b850),
+            to(#54b850),
+            color-stop(0.5,#6fce93)
         );
     background-image:-moz-linear-gradient(
             top, 
