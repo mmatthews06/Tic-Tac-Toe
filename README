@@ -9,12 +9,12 @@ Thank you very much for your time in evaluating my project.  Below I have includ
 ~Michael Matthews
 
 Tested on:
-- Firefox 3.6: works
 - Firefox 4: works
 - Safari 5: works BEST (animations)
 - Mobile Safari (iPhone/iPad): works BEST (animations)
 - Google Chrome: works BEST (animations)
 - Android mobile: works BEST (animations)
+- Firefox 3.6: works (no CSS transitions)
 - IE 9: works
 - IE 6: does not work
 
@@ -23,7 +23,7 @@ Quick Features List:
 - HTML5 elements
 - jQuery work
 - AJAX for tic tac toe moves
-- CSS gradients
+- CSS gradients, and transitions
 - CSS animations (on webkit)
 - iPhone "Add to Home screen" functionality
 
@@ -95,6 +95,7 @@ iPhone Home screen app icon: http://ii-r4nd0m-w0lf-ii.deviantart.com/art/FREE-ti
 New game wand: http://www.iconarchive.com/show/oxygen-icons-by-oxygen-icons.org/Actions-games-solve-icon.html
 Current game chess icon: http://www.iconarchive.com/show/black-and-blue-add-on-icons-by-icondrawer/black-chess-icon.html
 Home nave icon: http://www.iconarchive.com/show/oxygen-icons-by-oxygen-icons.org/Actions-go-home-icon.html
+Background: http://www.coxmediagroup.com/ (with a simple color modification)
 
 Intructions:
 1. Fork this repo on github.
