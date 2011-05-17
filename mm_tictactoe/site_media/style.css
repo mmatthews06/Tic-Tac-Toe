@@ -182,7 +182,7 @@ section {
 
 section.obscured {
     z-index: 100;
-    opacity: 0.25;
+    opacity: 0.1;
 }
 
 section.active {
