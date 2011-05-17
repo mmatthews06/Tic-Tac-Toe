@@ -81,6 +81,13 @@ sys	0m0.010s
 
 It appears that the number system is faster than the crude character win test here.
 
+CREDITS:
+Free icons came from here:
+iPhone Home screen app icon: http://ii-r4nd0m-w0lf-ii.deviantart.com/art/FREE-tic-tac-toe-icon-184091530
+New game wand: http://www.iconarchive.com/show/oxygen-icons-by-oxygen-icons.org/Actions-games-solve-icon.html
+Current game chess icon: http://www.iconarchive.com/show/black-and-blue-add-on-icons-by-icondrawer/black-chess-icon.html
+Home nave icon: http://www.iconarchive.com/show/oxygen-icons-by-oxygen-icons.org/Actions-go-home-icon.html
+
 Intructions:
 1. Fork this repo on github.
 2. Create an app that can interactively play the game of Tic Tac Toe against another player and never lose.
