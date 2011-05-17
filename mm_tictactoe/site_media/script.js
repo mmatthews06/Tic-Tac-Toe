@@ -6,19 +6,38 @@ var END_WIN = 0;
 var END_LOSS = 1;
 var END_DRAW = 2;
 
+function gameMoveEnd(e) {
+    var targ;
+    if (!e) var e = window.event;
+    if (e.target) targ = e.target;
+    else if (e.srcElement) targ = e.srcElement;
+    targ.setAttribute('id', '');
+    
+    var gameMoveIndex = targ;
+    var gridIndex = $(targ).data().gridIndex;
+    
+    var data = { 'gridIndex': gridIndex };
+    var args = { type:"POST", url:"/gameJAX/", data:data,
+        complete:gameMoveResponse };
+    $.ajax(args);
+}
+
 function gameMove(e) {
     var targ;
     if (!e) var e = window.event;
     if (e.target) targ = e.target;
     else if (e.srcElement) targ = e.srcElement;
-    
-    var gameMoveIndex = targ;
-    var gameMoveInt = parseInt(gameMoveIndex.id);
-    
-    var data = { gridIndex: gameMoveInt };
-    var args = { type:"POST", url:"/gameJAX/", data:data,
-        complete:gameMoveResponse };
-    $.ajax(args);
+    $(targ).data('gridIndex', targ.id);
+    if (!$.browser.webkit) {
+        gameMoveEnd(e);
+        return false;
+    }
+            
+    targ.addEventListener('webkitAnimationEnd', gameMoveEnd, false);
+    targ.setAttribute('class', 'o');
+    targ.setAttribute('id', 'animated');
+                
+    return false;
 }
 
 function gameMoveResponse(res, status) {

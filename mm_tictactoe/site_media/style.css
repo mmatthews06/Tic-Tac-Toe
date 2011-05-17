@@ -192,6 +192,7 @@ section.active {
 
 #gameEndMessage {
     text-align:center;
+    font-weight: bold;
     font-size: 1.5em;
 }
 
@@ -199,6 +200,15 @@ table#gameBoard tr td {
     border: 1px solid black;
     height: 92px;
     width: 92px;
+}
+
+@-webkit-keyframes 'piecedrop' {
+    0% {
+        -webkit-transform: scale(2);
+    }
+    100% {
+        -webkit-transform: scale(1);
+    }
 }
 
 div.x {
@@ -211,6 +221,12 @@ div.o {
     background: url('/site_media/o.png');
     height: 90px;
     width: 90px;
+}
+
+div#animated.o {
+    -webkit-animation: piecedrop;
+    -webkit-animation-duration: 0.5s;
+    -webkit-animation-iteration-count: 1;
 }
 
 input.blank, div.blank {

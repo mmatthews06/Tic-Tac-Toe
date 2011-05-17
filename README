@@ -11,8 +11,8 @@ Thank you very much for your time in evaluating my project.  Below I have includ
 Tested on:
 - Firefox 3.6: works
 - Firefox 4: works
-- Safari 5: works
-- Mobile Safari (iPhone/iPad): works great
+- Safari 5: works BEST (animations)
+- Mobile Safari (iPhone/iPad): works BEST (animations)
 - Google Chrome: ??
 - Android mobile: ?? 
 - IE 9: works
@@ -35,9 +35,8 @@ For the game itself, I went with an array of integers to represent the game boar
 The first example seems more compact, as well.  There is probably a better solution than either of these, but I was happy with how it worked out.  See below for a real performance test that I did.
 
 TODO:
-- Better win/loss/draw game ending message (broken during AJAX overhaul, easy fix)
+- Still need slightly better looking win/loss/draw game ending dialog
 - iPhone "Add to home screen" special functionality (including Google's open sourced mobile bookmark bubble)
-- Animation for player clicks.  Plan to scale the O up and then plop it down on the screen.
 - Better colors (FYI, if it wasn't obvious, I did steal Cox Media's main page background, and I had a blue color scheme that I thought was pretty good, but I thought better of checking in an exact copy of the background.  So I changed the site colors, and now I'm not too happy with them).
 - Work on two-player system.  Will likely require:
 	- Turn timer to prevent stalling, and allow AJAX syncing
