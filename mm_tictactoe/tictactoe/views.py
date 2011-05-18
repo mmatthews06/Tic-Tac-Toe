@@ -1,5 +1,6 @@
 # Create your views here.
 from datetime import datetime
+import random
 
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
@@ -14,6 +15,8 @@ END_WIN = 0
 END_LOSS = 1
 END_DRAW = 2
 
+random.seed(42)
+
 def home(request):
     return render_to_response('home.html',
             context_instance=RequestContext(request))
@@ -27,7 +30,10 @@ def login(request):
     player.lastLogin = datetime.now()
 
     game = Game(player1=player)
-    game.nextTurn()
+
+    # Randomize whether computer starts, or player
+    if random.randint(1,2) == 1:
+        game.nextTurn()
 
     player.save()
     game.save()
@@ -41,7 +47,11 @@ def newGameJAX(request):
 
     player = request.session['player']
     game = Game(player1=player)
-    game.nextTurn()
+
+    # Randomize whether computer starts, or player
+    if random.randint(1,2) == 1:
+        game.nextTurn()
+
     game.save()
     request.session['game'] = game
     response = { 'board': game.board, 'ended': False }
