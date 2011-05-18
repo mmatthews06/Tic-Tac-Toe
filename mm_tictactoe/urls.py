@@ -19,7 +19,6 @@ urlpatterns = patterns('',
     (r'^login/', 'mm_tictactoe.tictactoe.views.login'),
     (r'^game/', 'mm_tictactoe.tictactoe.views.game'),
     (r'^gameJAX/', 'mm_tictactoe.tictactoe.views.gameJAX'),
-    (r'^newGame/', 'mm_tictactoe.tictactoe.views.newGame'),
     (r'^newGameJAX/', 'mm_tictactoe.tictactoe.views.newGameJAX'),
     (r'^site_media/(?P<path>.*)$', 'django.views.static.serve',
                  {'document_root': settings.MEDIA_ROOT})

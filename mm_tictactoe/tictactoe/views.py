@@ -49,61 +49,37 @@ def newGameJAX(request):
     return HttpResponse(serialized, mimetype="application/json")
 
 def game(request):
-    game = request.session['game']
-    player = request.session['player']
-    player.lastActive = datetime.now()
+    if 'player' not in request.session:
+        return HttpResponseRedirect('/home/')
+    if 'game' not in request.session:
+        return HttpResponseRedirect('/home/')
 
-    endGame = False
-    if request.method == 'POST':
-        index = int(request.POST['gridIndex'])
-        playerChar = game.O
-        otherPlayerChar = game.X
-        if player == game.player2:
-            playerChar = game.X
-            otherPlayerChar = game.O
+    request, game, player, endState = __gameMove(request)
 
-        game.playerTurn(playerChar, index)
-
-        if game.checkWinner(playerChar):
-            game.winner = player
-            player.wins += 1
-            endGame = True
-            messages.add_message(request, messages.INFO,
-                    'You won!  Record: %s - %s - %s' %\
-                            (player.wins, player.losses, player.draws))
-
-        if game.nextTurn(otherPlayerChar):
-            game.winner = game.player2
-            player.losses += 1
-            endGame = True
-            messages.add_message(request, messages.INFO,
-                    'You lost!  Record: %s - %s - %s' %\
-                            (player.wins, player.losses, player.draws))
-
-        if game.turn >= 9:
-            endGame = True
-            player.draws += 1
-            messages.add_message(request, messages.INFO,
-                    'Draw!  Record: %s - %s - %s' %\
-                            (player.wins, player.losses, player.draws))
-
-        game.save()
-        request.session['game'] = game
-
-    player.save()
-    request.session['player'] = player
     return render_to_response('game.html',
-            {'game': game, 'endGame': endGame},
+            {'game': game, 'ended': game.ended},
             context_instance=RequestContext(request))
 
 def gameJAX(request):
+    # TODO: Check for 'player' and 'game' in the session,
+    # and return errors to be handled by AJAX caller.
+    request, game, player, endState = __gameMove(request)
+    response = { 'board': game.board,
+                 'ended': game.ended,
+                 'endState': endState,
+                 'wins': player.wins,
+                 'losses': player.losses,
+                 'draws': player.draws}
+    serialized = simplejson.dumps(response)
+    return HttpResponse(serialized, mimetype="application/json")
+
+def __gameMove(request):
     game = request.session['game']
     player = request.session['player']
     player.lastActive = datetime.now()
 
-    endGame = False
     endState = None
-    if request.method == 'POST':
+    if not game.ended and request.method == 'POST':
         index = int(request.POST['gridIndex'])
         playerChar = game.O
         otherPlayerChar = game.X
@@ -115,18 +91,18 @@ def gameJAX(request):
 
         if game.checkWinner(playerChar):
             game.winner = player
+            game.ended = True
             player.wins += 1
-            endGame = True
             endState = END_WIN
 
         if game.nextTurn(otherPlayerChar):
             game.winner = game.player2
+            game.ended = True
             player.losses += 1
-            endGame = True
             endState = END_LOSS
 
-        if not endGame and game.turn >= 9:
-            endGame = True
+        if not game.ended and game.turn >= 9:
+            game.ended = True
             player.draws += 1
             endState = END_DRAW
 
@@ -135,13 +111,6 @@ def gameJAX(request):
 
     player.save()
     request.session['player'] = player
+    return request, game, player, endState
 
-    response = { 'board': game.board,
-                 'ended': endGame,
-                 'endState': endState,
-                 'wins': player.wins,
-                 'losses': player.losses,
-                 'draws': player.draws}
-    serialized = simplejson.dumps(response)
-    return HttpResponse(serialized, mimetype="application/json")
 

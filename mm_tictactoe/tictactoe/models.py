@@ -54,6 +54,7 @@ class Game(models.Model):
     player1 = models.ForeignKey(Player, related_name='player1')
     player2 = models.ForeignKey(Player, null=True, related_name='player2')
     winner = models.ForeignKey(Player, null=True, related_name='winner')
+    ended = models.BooleanField(default=False)
     turn = models.SmallIntegerField(default=0)
     board = ArrayField(max_length=9,
             default=[0, 0, 0, 0, 0, 0, 0, 0, 0])
