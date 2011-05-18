@@ -64,6 +64,7 @@ nav ul {
 
 nav ul li {
     display: inline-block;
+    position: relative;
     float: left;
     width: 106px;
     height: 100%;
@@ -79,6 +80,19 @@ nav ul li {
 
 #navHome {
     background-image: url(/site_media/Actions-go-home-icon.png);
+}
+
+#navHome:hover:after
+{
+    display: block;
+    content: "Home";
+    position: absolute;
+    font-weight: bold;
+    text-align: center;
+    height: 105px;
+    line-height: 105px;
+    width: 100%;
+    z-index:1000;
 }
 
 #navHome.selected {
@@ -105,6 +119,19 @@ nav ul li {
     background-image: url(/site_media/Actions-games-solve-icon.png);
 }
 
+#navNewGame:hover:after
+{
+    display: block;
+    content: "New Game";
+    position: absolute;
+    font-weight: bold;
+    text-align: center;
+    height: 105px;
+    line-height: 105px;
+    width: 100%;
+    z-index:1000;
+}
+
 #navNewGame.selected {
     background-image: url(/site_media/Actions-games-solve-icon.png),
         -webkit-gradient(
@@ -127,6 +154,19 @@ nav ul li {
 
 #navCurGame {
     background-image: url(/site_media/black-chess-icon.png);
+}
+
+#navCurGame:hover:after
+{
+    display: block;
+    content: "Current Game";
+    position: absolute;
+    font-weight: bold;
+    text-align: center;
+    height: 105px;
+    line-height: 105px;
+    width: 100%;
+    z-index:1000;
 }
 
 #navCurGame.selected {
