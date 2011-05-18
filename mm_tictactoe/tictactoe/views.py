@@ -35,7 +35,7 @@ def login(request):
     request.session['game'] = game
     return HttpResponseRedirect('/game/')
 
-def newGame(request):
+def newGameJAX(request):
     if 'player' not in request.session:
         return HttpResponseRedirect('/home/')
 
@@ -44,7 +44,9 @@ def newGame(request):
     game.nextTurn()
     game.save()
     request.session['game'] = game
-    return HttpResponseRedirect('/game/')
+    response = { 'board': game.board, 'ended': False }
+    serialized = simplejson.dumps(response)
+    return HttpResponse(serialized, mimetype="application/json")
 
 def game(request):
     game = request.session['game']

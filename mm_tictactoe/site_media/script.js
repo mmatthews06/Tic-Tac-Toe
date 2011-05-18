@@ -70,9 +70,7 @@ function gameMoveResponse(res, status) {
         }
     }
 
-    var $gameBoard = $('#gameBoard');
-    $gameBoard.empty();
-    $gameBoard.append(gameSquares.join(''));
+    $('#gameBoard').html(gameSquares.join(''));
     if (ended) {
         var endMessage = '<p>';
         $('section#gameSection').removeClass('active');
@@ -93,8 +91,8 @@ function gameMoveResponse(res, status) {
         endMessage += "Wins: " + res.wins;
         endMessage += "  Losses: " + res.losses; 
         endMessage += "  Draws: " + res.draws;
-        endMessage += "</p>"
-        endMessage += "<a href='/newGame/'>New Game?</a>"
+        endMessage += "</p>";
+        endMessage += "<a href='#' onclick='requestNewGame(event)'>New Game?</a>";
         $('#gameEndMessage').html(endMessage);
     }
 }
@@ -105,10 +103,6 @@ function navClicked(e) {
     if (e.target) navItem = e.target;
     else if (e.srcElement) navItem = e.srcElement;
     
-    // FIXME: This is a pretty hacky way to get a click
-    // background changed, but works well enough for now.
-    // Need to clean up the nav bar (move New Game off),
-    // and make this a real selection.
     navItem.setAttribute('class', 'selected');
                 
     switch (navItem.id) {
@@ -116,13 +110,27 @@ function navClicked(e) {
             window.location.href = "/home/";
             break;
         case 'navNewGame':
-            window.location.href = "/newGame/";
+            requestNewGame();
             break;
         case 'navCurGame':
             window.location.href = "/game/";
             break;
     }
     
+}
+
+function requestNewGame() {
+    var args = { type:"POST", url:"/newGameJAX/",
+        complete:receivedNewGame };
+    $.ajax(args);
+}
+
+function receivedNewGame(res, status) {
+    $('section#gameEndSection').removeClass('active');
+    $('section#gameSection').removeClass('obscured');
+    $('section#gameSection').addClass('active');
+    $('#navNewGame').removeClass('selected');
+    gameMoveResponse(res, status);
 }
 
 window.addEventListener('load', function() {
