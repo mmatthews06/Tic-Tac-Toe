@@ -147,41 +147,15 @@ class Game(models.Model):
 
         # Try to win, check for two in a row
         win = 2*player
-        if self.sumAndSet(self.ROW1, win, player):
-            return True
-        if self.sumAndSet(self.ROW2, win, player):
-            return True
-        if self.sumAndSet(self.ROW3, win, player):
-            return True
-        if self.sumAndSet(self.COL1, win, player):
-            return True
-        if self.sumAndSet(self.COL2, win, player):
-            return True
-        if self.sumAndSet(self.COL3, win, player):
-            return True
-        if self.sumAndSet(self.DIAG1, win, player):
-            return True
-        if self.sumAndSet(self.DIAG2, win, player):
-            return True
+        for line in self.LINES:
+            if self.sumAndSet(line, win, player):
+                return True
 
         # Try to block the other player
         block = 2*otherPlayer
-        if self.sumAndSet(self.ROW1, block, player):
-            return False
-        if self.sumAndSet(self.ROW2, block, player):
-            return False
-        if self.sumAndSet(self.ROW3, block, player):
-            return False
-        if self.sumAndSet(self.COL1, block, player):
-            return False
-        if self.sumAndSet(self.COL2, block, player):
-            return False
-        if self.sumAndSet(self.COL3, block, player):
-            return False
-        if self.sumAndSet(self.DIAG1, block, player):
-            return False
-        if self.sumAndSet(self.DIAG2, block, player):
-            return False
+        for line in self.LINES:
+            if self.sumAndSet(line, block, player):
+                return False
 
         # Either try to fork, or block the opponent from forking.
         if self.forkTestAndSet(player, otherPlayer):
