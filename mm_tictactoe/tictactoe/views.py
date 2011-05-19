@@ -28,13 +28,7 @@ def login(request):
 
     player = Player.objects.get_or_create(name=playerName)[0]
     player.lastLogin = datetime.now()
-
-    game = Game(player1=player)
-
-    # Randomize whether computer starts, or player
-    if random.randint(1,2) == 1:
-        game.nextTurn()
-
+    game = __setupNewGame(player)
     player.save()
     game.save()
     request.session['player'] = player
@@ -46,12 +40,7 @@ def newGameJAX(request):
         return HttpResponseRedirect('/home/')
 
     player = request.session['player']
-    game = Game(player1=player)
-
-    # Randomize whether computer starts, or player
-    if random.randint(1,2) == 1:
-        game.nextTurn()
-
+    game = __setupNewGame(player)
     game.save()
     request.session['game'] = game
     response = { 'board': game.board, 'ended': False }
@@ -82,6 +71,16 @@ def gameJAX(request):
                  'draws': player.draws}
     serialized = simplejson.dumps(response)
     return HttpResponse(serialized, mimetype="application/json")
+
+def __setupNewGame(player):
+    game = Game(player1=player)
+
+    # Randomize whether computer starts, or player
+    if random.randint(1,2) == 1:
+        game.nextTurn()
+
+    return game
+
 
 def __gameMove(request):
     game = request.session['game']
