@@ -68,30 +68,6 @@ class Game(models.Model):
     def lineVals(self, line):
         return [self.board[i] for i in line]
 
-    def row1(self):
-        return self.lineVals(self.ROW1)
-
-    def row2(self):
-        return self.lineVals(self.ROW2)
-
-    def row3(self):
-        return self.lineVals(self.ROW3)
-
-    def col1(self):
-        return self.lineVals(self.COL1)
-
-    def col2(self):
-        return self.lineVals(self.COL2)
-
-    def col3(self):
-        return self.lineVals(self.COL3)
-
-    def diag1(self):
-        return self.lineVals(self.DIAG1)
-
-    def diag2(self):
-        return self.lineVals(self.DIAG2)
-
     def playerTurn(self, player, index):
         """
         Handle a non-computer player turn.
@@ -282,12 +258,8 @@ class Game(models.Model):
         of the lines will add up to 3 times that player's integer specifier.
         """
         win = 3*player
-        if sum(self.row1()) == win: return True
-        if sum(self.row2()) == win: return True
-        if sum(self.row3()) == win: return True
-        if sum(self.col1()) == win: return True
-        if sum(self.col2()) == win: return True
-        if sum(self.col3()) == win: return True
-        if sum(self.diag1()) == win: return True
-        if sum(self.diag2()) == win: return True
+        for line in self.LINES:
+            if sum(self.lineVals(line)) == win:
+                return True
+
         return False
