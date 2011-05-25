@@ -10,7 +10,6 @@ from django.utils import simplejson
 
 from models import Player, Game
 
-
 END_WIN = 0
 END_LOSS = 1
 END_DRAW = 2
@@ -81,7 +80,6 @@ def __setupNewGame(player):
 
     return game
 
-
 def __gameMove(request):
     game = request.session['game']
     player = request.session['player']
@@ -90,11 +88,8 @@ def __gameMove(request):
     endState = None
     if not game.ended and request.method == 'POST':
         index = int(request.POST['gridIndex'])
-        playerChar = game.O
-        otherPlayerChar = game.X
-        if player == game.player2:
-            playerChar = game.X
-            otherPlayerChar = game.O
+        playerChar = game.O if player == game.player1 else game.X
+        otherPlayerChar = game.X if playerChar == game.O else game.O
 
         game.playerTurn(playerChar, index)
 

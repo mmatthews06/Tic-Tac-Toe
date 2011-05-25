@@ -117,9 +117,7 @@ class Game(models.Model):
             # TODO: This should probably throw an error...
             return False
 
-        otherPlayer = self.X
-        if player == self.X:
-            otherPlayer = self.O
+        otherPlayer = self.X if player == self.O else self.O
 
         # Try to win, check for two in a row
         win = 2*player
