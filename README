@@ -6,8 +6,19 @@ Thank you very much for your time in evaluating my project.  Below I have includ
 
 ~Michael Matthews
 
+Usage:
+1) Install django in the manner described here: https://www.djangoproject.com/download/.  For me, this was just 3 command line commands
+2) Clone the readonly repo:
+	git clone git://github.com/mmatthews06/Tic-Tac-Toe.git
+3) Change into the new directory, and create a new database with this command:
+	python manage.py syncdb
+4) Start the server thusly:
+	python manage.py runserver
+5) Navigate to http://localhost:8000 in a browser (or host in a manner that would allow a mobile device to connect to the server)
+6) Play the game!
+
 Tested on:
-- Firefox 4: works
+- Firefox 21: works (no animations)
 - Safari 5: works BEST (animations)
 - Mobile Safari (iPhone/iPad): works BEST (animations)
 - Google Chrome: works BEST (animations)
