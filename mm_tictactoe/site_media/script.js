@@ -90,14 +90,10 @@ function markNewPiece($gamePiece, piece) {
     $gamePiece.fadeToggle({duration:200});
 }
 
-function navClicked(e) {
-    var navItem;
-    if (!e) var e = window.event;
-    if (e.target) navItem = e.target;
-    else if (e.srcElement) navItem = e.srcElement;
-
-    navItem.setAttribute('class', 'selected');
-    switch (navItem.id) {
+function navClicked() {
+    var $navItem = $(this);
+    $navItem.attr('class', 'selected');
+    switch ($navItem.attr('id')) {
         case 'navHome':
             window.location.href = "/home/";
             break;
@@ -216,4 +212,5 @@ $(document).ready(function(){
     }, 1000);
 
     $(".blank").click(gameMove);
+    $("nav > ul > li").click(navClicked);
 });
