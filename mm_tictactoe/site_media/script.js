@@ -6,71 +6,49 @@ var END_WIN = 0;
 var END_LOSS = 1;
 var END_DRAW = 2;
 
-function gameMoveEnd(e) {
-    var targ;
-    if (!e) var e = window.event;
-    if (e.target) targ = e.target;
-    else if (e.srcElement) targ = e.srcElement;
-    targ.setAttribute('id', '');
-    
-    var gameMoveIndex = targ;
-    var gridIndex = $(targ).data().gridIndex;
-    
-    var data = { 'gridIndex': gridIndex };
-    var args = { type:"POST", url:"/gameJAX/", data:data,
-        complete:gameMoveResponse };
-    $.ajax(args);
+function gameMove() {
+    $(this).hide()
+        .unbind('click')
+        .attr('class', 'o')
+        .fadeToggle({
+            duration:700,
+            complete:gameMoveEnd
+        });
 }
 
-function gameMove(e) {
-    var targ;
-    if (!e) var e = window.event;
-    if (e.target) targ = e.target;
-    else if (e.srcElement) targ = e.srcElement;
-    $(targ).data('gridIndex', targ.id);
-    if (!$.browser.webkit) {
-        gameMoveEnd(e);
-        return false;
-    }
-            
-    targ.addEventListener('webkitAnimationEnd', gameMoveEnd, false);
-    targ.setAttribute('class', 'o');
-    targ.setAttribute('id', 'animated');
-                
-    return false;
+function gameMoveEnd(){
+    $gamePiece = $(this);
+    $.ajax({
+        type: "POST",
+        url:"/gameJAX/",
+        data: {'gridIndex': $gamePiece.attr('id')},
+        complete: gameMoveResponse
+    });
 }
 
-function gameMoveResponse(res, status) {
+function gameMoveResponse(response, status) {
     if (status != "success") {
         // TODO: Handle an error!
         return;
     }
 
-    res = $.parseJSON(res.responseText);
+    res = $.parseJSON(response.responseText);
     var ended = res.ended;
     var board = res.board;
-    var gameSquares = [];
 
-    gameSquares.push('<tr>')
     for (var i = 0; i < board.length; i++) {
-        if (i > 0 && !(i % 3)) {
-            gameSquares.push('</tr>')
-            gameSquares.push('<tr>')
+        $gamePiece = $('div#'+i);
+        if (board[i] == X_PIECE) {
+            if (!$gamePiece.hasClass('x')) {
+                markNewPiece($gamePiece, X_PIECE);
+            }
         }
-        if (board[i] == X_PIECE)
-            gameSquares.push('<td><div class="x"></div></td>');
-        else if (board[i] == O_PIECE)
-            gameSquares.push('<td><div class="o"></div></td>');
-        else {
-            tdString = '<td><div id="' + i + '" class="blank"';
-            if (!ended)
-                tdString += ' onclick="gameMove(event)"'
-            tdString += '></div></td>';
-            gameSquares.push(tdString);
+        else if (board[i] == O_PIECE) {
+            if (!$gamePiece.hasClass('o')) {
+                markNewPiece($gamePiece, O_PIECE);
+            }
         }
     }
-
-    $('#gameBoard').html(gameSquares.join(''));
     if (ended) {
         var endMessage = '<p>';
         $('section#gameSection').removeClass('active');
@@ -89,7 +67,7 @@ function gameMoveResponse(res, status) {
         }
         endMessage += "Record:<br />"
         endMessage += "Wins: " + res.wins;
-        endMessage += "  Losses: " + res.losses; 
+        endMessage += "  Losses: " + res.losses;
         endMessage += "  Draws: " + res.draws;
         endMessage += "</p>";
         endMessage += "<a href='#' onclick='requestNewGame(event)'>New Game?</a>";
@@ -97,14 +75,27 @@ function gameMoveResponse(res, status) {
     }
 }
 
+function markNewPiece($gamePiece, piece) {
+    $gamePiece.hide()
+        .unbind('click');
+    switch (piece) {
+        case X_PIECE:
+            $gamePiece.attr('class', 'x');
+            break;
+        case O_PIECE:
+            $gamePiece.attr('class', 'o');
+            break;
+    }
+    $gamePiece.fadeToggle({duration:700});
+}
+
 function navClicked(e) {
     var navItem;
     if (!e) var e = window.event;
     if (e.target) navItem = e.target;
     else if (e.srcElement) navItem = e.srcElement;
-    
+
     navItem.setAttribute('class', 'selected');
-                
     switch (navItem.id) {
         case 'navHome':
             window.location.href = "/home/";
@@ -116,7 +107,6 @@ function navClicked(e) {
             window.location.href = "/game/";
             break;
     }
-    
 }
 
 function requestNewGame() {
@@ -125,12 +115,36 @@ function requestNewGame() {
     $.ajax(args);
 }
 
-function receivedNewGame(res, status) {
+function receivedNewGame(response, status) {
     $('section#gameEndSection').removeClass('active');
     $('section#gameSection').removeClass('obscured');
     $('section#gameSection').addClass('active');
     $('#navNewGame').removeClass('selected');
-    gameMoveResponse(res, status);
+    setupNewGame(response, status);
+}
+
+function setupNewGame(response, status) {
+    if (status != "success") {
+        // TODO: Handle an error!
+        return;
+    }
+
+    res = $.parseJSON(response.responseText);
+    var ended = res.ended;
+    var board = res.board;
+
+    for (var i = 0; i < board.length; i++) {
+        $gamePiece = $('div#'+i);
+        if (board[i] == X_PIECE) {
+            markNewPiece($gamePiece, X_PIECE);
+        }
+        else if (board[i] == O_PIECE) {
+            markNewPiece($gamePiece, O_PIECE);
+        } else {
+            $gamePiece.attr('class','blank')
+                .click(gameMove);
+        }
+    }
 }
 
 function getCookie(name) {
@@ -149,10 +163,13 @@ function getCookie(name) {
     return cookieValue;
 }
 
+/* Used to setup CSRF token handling */
 function csrfSafeMethod(method) {
     // these HTTP methods do not require CSRF protection
     return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
 }
+
+/* Used to setup CSRF token handling */
 function sameOrigin(url) {
     // test that a given url is a same-origin URL
     // url could be relative or scheme relative or absolute
@@ -167,34 +184,35 @@ function sameOrigin(url) {
         !(/^(\/\/|http:|https:).*/.test(url));
 }
 
-
-window.addEventListener('load', function() {
-  var csrftoken = getCookie('csrftoken');
-  $.ajaxSetup({
-    beforeSend: function(xhr, settings) {
-        if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
+$(document).ready(function(){
+    var csrftoken = getCookie('csrftoken');
+    $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
             // Send the token to same-origin, relative URLs only.
             // Send the token only if the method warrants CSRF protection
             // Using the CSRFToken value acquired earlier
             xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
         }
-    }
-  });
-  window.setTimeout(function() {
-    var bubble = new google.bookmarkbubble.Bubble();
+    });
+    window.setTimeout(function() {
+        var bubble = new google.bookmarkbubble.Bubble();
 
-    var parameter = 'bmb=1';
+        var parameter = 'bmb=1';
 
-    bubble.hasHashParameter = function() {
-      return window.location.hash.indexOf(parameter) != -1;
-    };
+        bubble.hasHashParameter = function() {
+            return window.location.hash.indexOf(parameter) != -1;
+        };
 
-    bubble.setHashParameter = function() {
-      if (!this.hasHashParameter()) {
-        window.location.hash += parameter;
-      }
-    };
+        bubble.setHashParameter = function() {
+            if (!this.hasHashParameter()) {
+                window.location.hash += parameter;
+            }
+        };
 
-    bubble.showIfAllowed();
-  }, 1000);
-}, false);
+        bubble.showIfAllowed();
+    }, 1000);
+
+    $(".blank").click(gameMove);
+});

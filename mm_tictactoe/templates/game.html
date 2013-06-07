@@ -14,19 +14,19 @@
     {% endif %}
     {% if index == game.X %}
         <td>
-            <div class="x"></div>
+            <div class="x" id="{{ forloop.counter0 }}"></div>
         </td>
     {% else %} {% if index == game.O %}
         <td>
-            <div class="o"></div>
+            <div class="o" id="{{ forloop.counter0 }}"></div>
         </td>
     {% else %} {% if ended %}
         <td> 
-            <div class="blank"></div>
+            <div class="blank" id="{{ forloop.counter0 }}"></div>
         </td>
     {% else %}
         <td>
-            <div class="blank" onclick="gameMove(event)" id="{{ forloop.counter0 }}"></div>
+            <div class="blank" id="{{ forloop.counter0 }}"></div>
         </td>
     {% endif %} {% endif %} {% endif %}
     {% endfor %}
