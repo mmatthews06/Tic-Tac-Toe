@@ -11,7 +11,7 @@ function gameMove() {
         .unbind('click')
         .attr('class', 'o')
         .fadeToggle({
-            duration:700,
+            duration:400,
             complete:gameMoveEnd
         });
 }
@@ -50,28 +50,29 @@ function gameMoveResponse(response, status) {
         }
     }
     if (ended) {
-        var endMessage = '<p>';
         $('section#gameSection').removeClass('active');
         $('section#gameSection').addClass('obscured');
         $('section#gameEndSection').addClass('active');
+
+        $gameEndMessage = $('#gameEndMessage').html('<p>');
         switch (res.endState) {
             case END_WIN:
-                endMessage += "You Win!<br />";
+                $gameEndMessage.append("You Win!<br />");
                 break;
             case END_LOSS:
-                endMessage += "You Lose!<br />";
+                $gameEndMessage.append("You Lose!<br />");
                 break;
             case END_DRAW:
-                endMessage += "It's a draw!<br />";
+                $gameEndMessage.append("It's a draw!<br />");
                 break;
         }
-        endMessage += "Record:<br />"
-        endMessage += "Wins: " + res.wins;
-        endMessage += "  Losses: " + res.losses;
-        endMessage += "  Draws: " + res.draws;
-        endMessage += "</p>";
-        endMessage += "<a href='#' onclick='requestNewGame(event)'>New Game?</a>";
-        $('#gameEndMessage').html(endMessage);
+        $gameEndMessage.append("Record:<br />")
+            .append("Wins: " + res.wins)
+            .append("  Losses: " + res.losses)
+            .append("  Draws: " + res.draws)
+            .append("</p>")
+            .append("<a href='#'>New Game?</a>")
+            .click(requestNewGame);
     }
 }
 
@@ -86,7 +87,7 @@ function markNewPiece($gamePiece, piece) {
             $gamePiece.attr('class', 'o');
             break;
     }
-    $gamePiece.fadeToggle({duration:700});
+    $gamePiece.fadeToggle({duration:200});
 }
 
 function navClicked(e) {
