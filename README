@@ -54,7 +54,8 @@ The first example seems more compact, as well.  There is probably a better solut
 
 TODO:
 - Still need slightly better looking win/loss/draw game ending dialog
-- Better colors (FYI, if it wasn't obvious, I did steal Cox Media's main page background, and I had a blue color scheme that I thought was pretty good, but I thought better of checking in an exact copy of the background.  So I changed the site colors, and now I'm not too happy with them).
+- Much better colors
+- More single page app functionality
 - Work on two-player system.  Will likely require:
 	- Turn timer to prevent stalling, and allow AJAX syncing
 	- Persist a list of logged in players.
@@ -105,9 +106,3 @@ New game wand: http://www.iconarchive.com/show/oxygen-icons-by-oxygen-icons.org/
 Current game chess icon: http://www.iconarchive.com/show/black-and-blue-add-on-icons-by-icondrawer/black-chess-icon.html
 Home nave icon: http://www.iconarchive.com/show/oxygen-icons-by-oxygen-icons.org/Actions-go-home-icon.html
 Background: http://www.coxmediagroup.com/ (with a simple color modification)
-
-Intructions:
-1. Fork this repo on github.
-2. Create an app that can interactively play the game of Tic Tac Toe against another player and never lose.
-3. Commit early and often, with good messages.
-4. Push your code back to github and send me a pull request.
