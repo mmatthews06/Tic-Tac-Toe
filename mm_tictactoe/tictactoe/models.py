@@ -37,6 +37,9 @@ class Game(models.Model):
     is probably tricky to follow.
     '''
     EMPTY = 0                   # empty board position specifier
+    END_WIN = 0
+    END_LOSS = 1
+    END_DRAW = 2
     X = 1                       # "player" X's integer to put in the board
     O = 4                       # "player" O's integer to put in the board
     ROW1 = [0,1,2]              # Indexes into the board array
@@ -72,8 +75,36 @@ class Game(models.Model):
         """
         Handle a non-computer player turn.
         """
+        # TODO: Check to make sure the gridIndex isn't already occupied,
+        # and throw an errory if it is.
         self.turn += 1
         self.board[index] = player
+
+    def makeMove(self, player, gridIndex):
+        playerChar = self.O if player == self.player1 else self.X
+        otherPlayerChar = self.X if playerChar == self.O else self.O
+
+        self.playerTurn(playerChar, gridIndex)
+
+        endState = None
+        if self.checkWinner(playerChar):
+            self.winner = player
+            self.ended = True
+            player.wins += 1
+            endState = self.END_WIN
+
+        if self.nextTurn(otherPlayerChar):
+            self.winner = self.player2
+            self.ended = True
+            player.losses += 1
+            endState = self.END_LOSS
+
+        if not self.ended and self.turn >= 9:
+            self.ended = True
+            player.draws += 1
+            endState = self.END_DRAW
+
+        return endState
 
     def nextTurn(self, player=X):
         """

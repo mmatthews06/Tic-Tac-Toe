@@ -3,6 +3,7 @@ import os
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+DEBUG_PROPAGATE_EXCEPTIONS = DEBUG
 
 # Custom added property to use to build later paths
 ROOT_PATH = os.path.dirname(__file__)

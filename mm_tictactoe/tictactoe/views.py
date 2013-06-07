@@ -10,10 +10,6 @@ from django.utils import simplejson
 
 from models import Player, Game
 
-END_WIN = 0
-END_LOSS = 1
-END_DRAW = 2
-
 random.seed(42)
 
 def home(request):
@@ -87,31 +83,12 @@ def __gameMove(request):
 
     endState = None
     if not game.ended and request.method == 'POST':
-        index = int(request.POST['gridIndex'])
-        playerChar = game.O if player == game.player1 else game.X
-        otherPlayerChar = game.X if playerChar == game.O else game.O
+        gridIndex = int(request.POST['gridIndex'])
+        endState = game.makeMove(player, gridIndex);
 
-        game.playerTurn(playerChar, index)
 
-        if game.checkWinner(playerChar):
-            game.winner = player
-            game.ended = True
-            player.wins += 1
-            endState = END_WIN
-
-        if game.nextTurn(otherPlayerChar):
-            game.winner = game.player2
-            game.ended = True
-            player.losses += 1
-            endState = END_LOSS
-
-        if not game.ended and game.turn >= 9:
-            game.ended = True
-            player.draws += 1
-            endState = END_DRAW
-
-        game.save()
-        request.session['game'] = game
+    game.save()
+    request.session['game'] = game
 
     player.save()
     request.session['player'] = player
