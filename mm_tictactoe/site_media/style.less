@@ -61,143 +61,125 @@ nav {
             @lightestColor,
             @lightColor);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@lightColor', endColorstr='@lightestColor');
+
+    ul {
+        height: 100%;
+        width: 320px;
+        margin-left: auto;
+        margin-right: auto;
+
+        li {
+            display: inline-block;
+            position: relative;
+            float: left;
+            width: 106px;
+            height: 100%;
+            border: 1px solid #999999;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            background-repeat: no-repeat;
+            background-position: center center;
+        }
+    }
 }
 
-nav ul {
-    height: 100%;
-    width: 320px;
-    margin-left: auto;
-    margin-right: auto;
-}
+nav#controls {
+    /* hover mixin */
+    .nav_hover {
+        display: block;
+        position: absolute;
+        font-weight: bold;
+        text-align: center;
+        height: 105px;
+        line-height: 105px;
+        width: 100%;
+        z-index:1000;
+    }
+    #navHome {
+        background-image: url(/site_media/Actions-go-home-icon.png);
+    }
+    #navHome:hover:after {
+        content: "Home";
+        .nav_hover;
+    }
+    #navNewGame {
+        background-image: url(/site_media/Actions-games-solve-icon.png);
+    }
+    #navNewGame:hover:after {
+        content: "New Game";
+        .nav_hover;
+    }
+    #navCurGame {
+        background-image: url(/site_media/black-chess-icon.png);
+    }
+    #navCurGame:hover:after {
+        content: "Current Game";
+        .nav_hover;
+    }
 
-nav ul li {
-    display: inline-block;
-    position: relative;
-    float: left;
-    width: 106px;
-    height: 100%;
-    border: 1px solid #999999;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
+    #navHome.selected {
+        background-image: url(/site_media/Actions-go-home-icon.png),
+            -webkit-gradient(
+                linear,
+                0% 0%,
+                0% 100%,
+                from(@darkColor),
+                to(@darkColor),
+                color-stop(.5,@middleColor)
+            );
+        background-image: url(/site_media/Actions-go-home-icon.png),
+            -moz-linear-gradient(
+                top,
+                @darkColor,
+                @middleColor,
+                @darkColor
+            );
+    }
 
-    background-repeat: no-repeat;
-    background-position: center center;
-}
+    #navNewGame.selected {
+        background-image: url(/site_media/Actions-games-solve-icon.png),
+            -webkit-gradient(
+                linear,
+                0% 0%,
+                0% 100%,
+                from(@darkColor),
+                to(@darkColor),
+                color-stop(.5,@middleColor)
+            );
+        background-image: url(/site_media/Actions-games-solve-icon.png),
+            -moz-linear-gradient(
+                top,
+                @darkColor,
+                @middleColor,
+                @darkColor
+            );
+    }
 
-#navHome {
-    background-image: url(/site_media/Actions-go-home-icon.png);
-}
-
-#navHome:hover:after
-{
-    display: block;
-    content: "Home";
-    position: absolute;
-    font-weight: bold;
-    text-align: center;
-    height: 105px;
-    line-height: 105px;
-    width: 100%;
-    z-index:1000;
-}
-
-#navHome.selected {
-    background-image: url(/site_media/Actions-go-home-icon.png),
-        -webkit-gradient(
-            linear,
-            0% 0%,
-            0% 100%,
-            from(@darkColor),
-            to(@darkColor),
-            color-stop(.5,@middleColor)
-        );
-
-    background-image: url(/site_media/Actions-go-home-icon.png),
-        -moz-linear-gradient(
-            top,
-            @darkColor,
-            @middleColor,
-            @darkColor
-        );
-}
-
-#navNewGame {
-    background-image: url(/site_media/Actions-games-solve-icon.png);
-}
-
-#navNewGame:hover:after
-{
-    display: block;
-    content: "New Game";
-    position: absolute;
-    font-weight: bold;
-    text-align: center;
-    line-height: 105px;
-    width: 100%;
-    z-index:1000;
-}
-
-#navNewGame.selected {
-    background-image: url(/site_media/Actions-games-solve-icon.png),
-        -webkit-gradient(
-            linear,
-            0% 0%,
-            0% 100%,
-            from(@darkColor),
-            to(@darkColor),
-            color-stop(.5,@middleColor)
-        );
-
-    background-image: url(/site_media/Actions-games-solve-icon.png),
-        -moz-linear-gradient(
-            top,
-            @darkColor,
-            @middleColor,
-            @darkColor
-        );
-}
-
-#navCurGame {
-    background-image: url(/site_media/black-chess-icon.png);
-}
-
-#navCurGame:hover:after
-{
-    display: block;
-    content: "Current Game";
-    position: absolute;
-    font-weight: bold;
-    text-align: center;
-    height: 105px;
-    line-height: 105px;
-    width: 100%;
-    z-index:1000;
-}
-
-#navCurGame.selected {
-    background-image: url(/site_media/black-chess-icon.png),
-        -webkit-gradient(
-            linear,
-            0% 0%,
-            0% 100%,
-            from(@darkColor),
-            to(@darkColor),
-            color-stop(.5,@middleColor)
-        );
-
-    background-image: url(/site_media/black-chess-icon.png),
-        -moz-linear-gradient(
-            top,
-            @darkColor,
-            @middleColor,
-            @darkColor
-        );
+    #navCurGame.selected {
+        background-image: url(/site_media/black-chess-icon.png),
+            -webkit-gradient(
+                linear,
+                0% 0%,
+                0% 100%,
+                from(@darkColor),
+                to(@darkColor),
+                color-stop(.5,@middleColor)
+            );
+        background-image: url(/site_media/black-chess-icon.png),
+            -moz-linear-gradient(
+                top,
+                @darkColor,
+                @middleColor,
+                @darkColor
+            );
+    }
 }
 
 nav#colors {
-    position:absolute;
-    bottom:0px;
+    position: absolute;
+    bottom: 0px;
+
     #green {
         background-color: @darkGreen;
     }
@@ -207,9 +189,6 @@ nav#colors {
     #purple {
         background-color: @darkPurple;
     }
-}
-
-section#gameSection {
 }
 
 section#gameSection table#gameBoard {
