@@ -29,9 +29,9 @@ function gameMoveResponse(response, status) {
         return;
     }
 
-    var res = $.parseJSON(response.responseText);
-    var ended = res.ended;
-    var board = res.board;
+    var gameData = $.parseJSON(response.responseText);
+    var ended = gameData.ended;
+    var board = gameData.board;
 
     for (var i = 0; i < board.length; i++) {
         $gamePiece = $('div#'+i);
@@ -46,33 +46,38 @@ function gameMoveResponse(response, status) {
             }
         }
     }
-    if (ended) {
-        $('section#gameSection').removeClass('active');
-        $('section#gameSection').addClass('obscured');
-        $('section#gameEndSection').addClass('active');
 
-        $gameEndMessage = $('#gameEndMessage').html('<p>');
-        switch (res.endState) {
-            case END_WIN:
-                $gameEndMessage.append("You Win!<br />");
-                break;
-            case END_LOSS:
-                $gameEndMessage.append("You Lose!<br />");
-                break;
-            case END_DRAW:
-                $gameEndMessage.append("It's a draw!<br />");
-                break;
-        }
-        $gameEndMessage.append("Record:<br />")
-            .append("Wins: " + res.wins)
-            .append("  Losses: " + res.losses)
-            .append("  Draws: " + res.draws)
-            .append("</p>")
-            .append("<a href='#'>New Game?</a>")
-            .click(requestNewGame);
+    if (ended) {
+        endGame(gameData);
     } else {
         bindBlanks();
     }
+}
+
+function endGame(gameData) {
+    $('section#gameSection').removeClass('active');
+    $('section#gameSection').addClass('obscured');
+    $('section#gameEndSection').addClass('active');
+
+    $gameEndMessage = $('#gameEndMessage').html('<p>');
+    switch (gameData.endState) {
+        case END_WIN:
+            $gameEndMessage.append("You Win!<br />");
+            break;
+        case END_LOSS:
+            $gameEndMessage.append("You Lose!<br />");
+            break;
+        case END_DRAW:
+            $gameEndMessage.append("It's a draw!<br />");
+            break;
+    }
+    $gameEndMessage.append("Record:<br />")
+        .append("Wins: " + gameData.wins)
+        .append("  Losses: " + gameData.losses)
+        .append("  Draws: " + gameData.draws)
+        .append("</p>")
+        .append("<a href='#'>New Game?</a>")
+    $('#content').click(requestNewGame);
 }
 
 function bindBlanks() {
@@ -114,6 +119,7 @@ function navClicked() {
 }
 
 function requestNewGame() {
+    $('#content').unbind('click');
     $.ajax({
         type: "POST",
         url: "/newGameJAX/",
@@ -136,10 +142,13 @@ function setupNewGame(response, status) {
     }
 
     unbindBlanks();
-    var res = $.parseJSON(response.responseText);
-    var ended = res.ended;
-    var board = res.board;
+    var gameData = $.parseJSON(response.responseText);
+    var ended = gameData.ended;
+    var board = gameData.board;
 
+    // TODO: This looks very similar to the gameMoveResponse loop, but
+    // it marks ever square in the box.  Consider consolidating these
+    // at some point.
     for (var i = 0; i < board.length; i++) {
         $gamePiece = $('div#'+i);
         if (board[i] == X_PIECE) {
