@@ -102,22 +102,6 @@ function markNewPiece($gamePiece, piece) {
     $gamePiece.fadeIn({duration:200});
 }
 
-function navClicked() {
-    var $navItem = $(this);
-    $navItem.attr('class', 'selected');
-    switch ($navItem.attr('id')) {
-        case 'navHome':
-            window.location.href = "/home/";
-            break;
-        case 'navNewGame':
-            requestNewGame();
-            break;
-        case 'navCurGame':
-            window.location.href = "/game/";
-            break;
-    }
-}
-
 function requestNewGame() {
     $('#content').unbind('click');
     $.ajax({
@@ -161,6 +145,38 @@ function setupNewGame(response, status) {
         }
     }
     bindBlanks();
+}
+
+function controlNavClicked() {
+    var $navItem = $(this);
+    $navItem.attr('class', 'selected');
+    switch ($navItem.attr('id')) {
+        case 'navHome':
+            window.location.href = "/home/";
+            break;
+        case 'navNewGame':
+            requestNewGame();
+            break;
+        case 'navCurGame':
+            window.location.href = "/game/";
+            break;
+    }
+}
+
+function colorsNavClicked() {
+    var $navItem = $(this);
+    $navItem.attr('class', 'selected');
+    switch ($navItem.attr('id')) {
+        case 'green':
+            less.modifyVars({darkColor: '@darkGreen'});
+            break;
+        case 'blue':
+            less.modifyVars({darkColor: '@darkBlue'});
+            break;
+        case 'purple':
+            less.modifyVars({darkColor: '@darkPurple'});
+            break;
+    }
 }
 
 function getCookie(name) {
@@ -231,5 +247,6 @@ $(document).ready(function(){
     }, 1000);
 
     bindBlanks();
-    $("nav > ul > li").click(navClicked);
+    $("nav#controls > ul > li").click(controlNavClicked);
+    $("nav#colors > ul > li").click(colorsNavClicked);
 });

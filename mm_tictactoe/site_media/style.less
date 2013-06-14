@@ -1,10 +1,15 @@
 @darkGreen: #367f3f;
-@middleGreen: lighten(@darkGreen, 8%);
-@lightGreen: lighten(@middleGreen, 8%);
-@lightestGreen: lighten(@lightGreen, 10%);
+@darkPurple: #942192;
+@darkBlue: #1630ac;
+
+
+@darkColor: @darkGreen;
+@middleColor: lighten(@darkColor, 8%);
+@lightColor: lighten(@middleColor, 8%);
+@lightestColor: lighten(@lightColor, 10%);
 
 body {
-    background-color:@middleGreen;
+    background-color:@middleColor;
 }
 
 header {
@@ -12,17 +17,17 @@ header {
         linear,
         0% 0%,
         0% 100%,
-        from(@darkGreen),
-        to(@darkGreen),
-        color-stop(.5,@middleGreen)
+        from(@darkColor),
+        to(@darkColor),
+        color-stop(.5,@middleColor)
     );
 
     background-image:-moz-linear-gradient(
             top,
-            @darkGreen,
-            @middleGreen,
-            @darkGreen);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@darkGreen', endColorstr='@middleGreen');
+            @darkColor,
+            @middleColor,
+            @darkColor);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@darkColor', endColorstr='@middleColor');
 
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -46,16 +51,16 @@ nav {
             linear,
             0% 0%,
             0% 100%,
-            from(@lightGreen),
-            to(@lightGreen),
-            color-stop(0.5,@lightestGreen)
+            from(@lightColor),
+            to(@lightColor),
+            color-stop(0.5,@lightestColor)
         );
     background-image:-moz-linear-gradient(
             top,
-            @lightGreen,
-            @lightestGreen,
-            @lightGreen);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@lightGreen', endColorstr='@lightestGreen');
+            @lightColor,
+            @lightestColor,
+            @lightColor);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@lightColor', endColorstr='@lightestColor');
 }
 
 nav ul {
@@ -78,7 +83,6 @@ nav ul li {
 
     background-repeat: no-repeat;
     background-position: center center;
-    
 }
 
 #navHome {
@@ -104,17 +108,17 @@ nav ul li {
             linear,
             0% 0%,
             0% 100%,
-            from(@darkGreen),
-            to(@darkGreen),
-            color-stop(.5,@middleGreen)
+            from(@darkColor),
+            to(@darkColor),
+            color-stop(.5,@middleColor)
         );
 
     background-image: url(/site_media/Actions-go-home-icon.png),
         -moz-linear-gradient(
             top,
-            @darkGreen,
-            @middleGreen,
-            @darkGreen
+            @darkColor,
+            @middleColor,
+            @darkColor
         );
 }
 
@@ -140,17 +144,17 @@ nav ul li {
             linear,
             0% 0%,
             0% 100%,
-            from(@darkGreen),
-            to(@darkGreen),
-            color-stop(.5,@middleGreen)
+            from(@darkColor),
+            to(@darkColor),
+            color-stop(.5,@middleColor)
         );
 
     background-image: url(/site_media/Actions-games-solve-icon.png),
         -moz-linear-gradient(
             top,
-            @darkGreen,
-            @middleGreen,
-            @darkGreen
+            @darkColor,
+            @middleColor,
+            @darkColor
         );
 }
 
@@ -177,18 +181,32 @@ nav ul li {
             linear,
             0% 0%,
             0% 100%,
-            from(@darkGreen),
-            to(@darkGreen),
-            color-stop(.5,@middleGreen)
+            from(@darkColor),
+            to(@darkColor),
+            color-stop(.5,@middleColor)
         );
 
     background-image: url(/site_media/black-chess-icon.png),
         -moz-linear-gradient(
             top,
-            @darkGreen,
-            @middleGreen,
-            @darkGreen
+            @darkColor,
+            @middleColor,
+            @darkColor
         );
+}
+
+nav#colors {
+    position:absolute;
+    bottom:0px;
+    #green {
+        background-color: @darkGreen;
+    }
+    #blue {
+        background-color: @darkBlue;
+    }
+    #purple {
+        background-color: @darkPurple;
+    }
 }
 
 section#gameSection {
