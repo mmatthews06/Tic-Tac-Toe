@@ -7,13 +7,10 @@ var END_LOSS = 1;
 var END_DRAW = 2;
 
 function gameMove() {
+    unbindBlanks();
     $(this).hide()
-        .unbind('click')
         .attr('class', 'o')
-        .fadeToggle({
-            duration:400,
-            complete:gameMoveEnd
-        });
+        .fadeIn(400, gameMoveEnd);
 }
 
 function gameMoveEnd(){
@@ -32,7 +29,7 @@ function gameMoveResponse(response, status) {
         return;
     }
 
-    res = $.parseJSON(response.responseText);
+    var res = $.parseJSON(response.responseText);
     var ended = res.ended;
     var board = res.board;
 
@@ -73,7 +70,17 @@ function gameMoveResponse(response, status) {
             .append("</p>")
             .append("<a href='#'>New Game?</a>")
             .click(requestNewGame);
+    } else {
+        bindBlanks();
     }
+}
+
+function bindBlanks() {
+    $(".blank").click(gameMove);
+}
+
+function unbindBlanks() {
+    $(".blank").unbind('click');
 }
 
 function markNewPiece($gamePiece, piece) {
@@ -107,9 +114,11 @@ function navClicked() {
 }
 
 function requestNewGame() {
-    var args = { type:"POST", url:"/newGameJAX/",
-        complete:receivedNewGame };
-    $.ajax(args);
+    $.ajax({
+        type: "POST",
+        url: "/newGameJAX/",
+        complete: receivedNewGame
+    });
 }
 
 function receivedNewGame(response, status) {
@@ -126,7 +135,8 @@ function setupNewGame(response, status) {
         return;
     }
 
-    res = $.parseJSON(response.responseText);
+    unbindBlanks();
+    var res = $.parseJSON(response.responseText);
     var ended = res.ended;
     var board = res.board;
 
@@ -138,10 +148,10 @@ function setupNewGame(response, status) {
         else if (board[i] == O_PIECE) {
             markNewPiece($gamePiece, O_PIECE);
         } else {
-            $gamePiece.attr('class','blank')
-                .click(gameMove);
+            $gamePiece.attr('class','blank');
         }
     }
+    bindBlanks();
 }
 
 function getCookie(name) {
@@ -211,6 +221,6 @@ $(document).ready(function(){
         bubble.showIfAllowed();
     }, 1000);
 
-    $(".blank").click(gameMove);
+    bindBlanks();
     $("nav > ul > li").click(navClicked);
 });
