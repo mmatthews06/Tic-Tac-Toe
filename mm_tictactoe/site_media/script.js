@@ -94,7 +94,7 @@ function markNewPiece($gamePiece, piece) {
             $gamePiece.attr('class', 'o');
             break;
     }
-    $gamePiece.fadeToggle({duration:200});
+    $gamePiece.fadeIn({duration:200});
 }
 
 function navClicked() {
