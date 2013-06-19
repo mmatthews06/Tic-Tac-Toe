@@ -81,7 +81,7 @@ class Game(models.Model):
         self.board[index] = player
 
     def makeMove(self, player, gridIndex):
-        playerChar = self.O if player == self.player1 else self.X
+        playerChar = self.O if player is self.player1 else self.X
         otherPlayerChar = self.X if playerChar == self.O else self.O
 
         self.playerTurn(playerChar, gridIndex)
