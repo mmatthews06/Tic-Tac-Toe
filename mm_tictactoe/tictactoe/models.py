@@ -2,9 +2,9 @@ from django.db import models
 from datetime import datetime
 from random import randrange
 
-class ArrayField(models.CommaSeparatedIntegerField):
+class ListField(models.CommaSeparatedIntegerField):
     """
-    A simple field that makes an actual array out of the comma-separated
+    A simple field that makes an actual list out of the comma-separated
     integers.  This is a custom class created by me.  There may be a better
     way to do this, though...
     """
@@ -42,24 +42,24 @@ class Game(models.Model):
     END_DRAW = 2
     X = 1                       # "player" X's integer to put in the board
     O = 4                       # "player" O's integer to put in the board
-    ROW1 = [0,1,2]              # Indexes into the board array
-    ROW2 = [3,4,5]              # Indexes into the board array
-    ROW3 = [6,7,8]              # Indexes into the board array
-    COL1 =      [0,3,6]         # Indexes into the board array
-    COL2 =      [1,4,7]         # Indexes into the board array
-    COL3 =      [2,5,8]         # Indexes into the board array
-    DIAG1 = [0,4,8]             # Indexes into the board array
-    DIAG2 = [6,4,2]             # Indexes into the board array
+    ROW1 = (0,1,2)              # Indexes into the board list
+    ROW2 = (3,4,5)              # Indexes into the board list
+    ROW3 = (6,7,8)              # Indexes into the board list
+    COL1 =      (0,3,6)         # Indexes into the board list
+    COL2 =      (1,4,7)         # Indexes into the board list
+    COL3 =      (2,5,8)         # Indexes into the board list
+    DIAG1 = (0,4,8)             # Indexes into the board list
+    DIAG2 = (6,4,2)             # Indexes into the board list
     LINES = (ROW1, ROW2, ROW3, COL1, COL2, COL3, DIAG1, DIAG2)
     CENTER = 4                  # Board's center index
-    CORNERS = [0,2,6,8]         # Board's corners
-    EDGES = [1,3,5,7]           # Board's edges
+    CORNERS = (0,2,6,8)         # Board's corners
+    EDGES = (1,3,5,7)           # Board's edges
     player1 = models.ForeignKey(Player, related_name='player1')
     player2 = models.ForeignKey(Player, null=True, related_name='player2')
     winner = models.ForeignKey(Player, null=True, related_name='winner')
     ended = models.BooleanField(default=False)
     turn = models.SmallIntegerField(default=0)
-    board = ArrayField(max_length=9,
+    board = ListField(max_length=9,
             default=[0, 0, 0, 0, 0, 0, 0, 0, 0])
 
     def __unicode__(self):
