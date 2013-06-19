@@ -65,20 +65,27 @@ class TicTacToeTest(TestCase):
 
         """
 
-        startingBoard = [Game.O, Game.O, Game.EMPTY,
-                    Game.X, Game.X, Game.EMPTY,
-                    Game.EMPTY, Game.EMPTY, Game.EMPTY]
+        O = Game.O
+        X = Game.X
+        _ = Game.EMPTY
+
+        startingBoard = [O, O, _,
+                         X, X, _,
+                         _, _, _]
 
 
-        expected = [Game.O, Game.O, Game.EMPTY,
-                    Game.X, Game.X, Game.X,
-                    Game.EMPTY, Game.EMPTY, Game.EMPTY]
+        expected = [O, O, _,
+                    X, X, X,
+                    _, _, _]
 
+        # Setup a fake game
         player1 = Player(name="player1")
         player2 = Player(name="player2")
         game = Game(player1=player1, player2=player2)
         game.board = startingBoard
         game.turn = 4
+
+        # make sure the "AI" wins
         win = game.nextTurn(Game.X)
         self.assertEqual(game.board, expected)
         self.assertTrue(win)
@@ -97,21 +104,30 @@ class TicTacToeTest(TestCase):
         in the empty spot to the right of the X, but that would mean the
         O's could win.
         """
+        O = Game.O
+        X = Game.X
+        _ = Game.EMPTY
 
-        startingBoard = [Game.O, Game.EMPTY, Game.X,
-                    Game.EMPTY, Game.X, Game.EMPTY,
-                    Game.O, Game.EMPTY, Game.EMPTY]
+        # Game board where O can win.
+        startingBoard = [O, _, X,
+                         _, X, _,
+                         O, _, _]
 
 
-        expected = [Game.O, Game.EMPTY, Game.X,
-                Game.X, Game.X, Game.EMPTY,
-                Game.O, Game.EMPTY, Game.EMPTY]
+        # Game board where X has blocked instead of forked (which would
+        # put an X in the 2nd row, 3rd column)
+        expected = [O, _, X,
+                    X, X, _,
+                    O, _, _]
 
+        # Setup game scenario with above board
         player1 = Player(name="player1")
         player2 = Player(name="player2")
         game = Game(player1=player1, player2=player2)
         game.board = startingBoard
         game.turn = 4
+
+        # make a move and make sure the AI blocked instead forked
         game.nextTurn(Game.X)
         self.assertEqual(game.board, expected)
 
