@@ -162,7 +162,6 @@ class TicTacToeTest(TestCase):
         # Setup a fake game
         game = self.__setupGame(startingBoard, 4)
 
-
         # make a move and make sure the AI blocked instead forked
         game.nextTurn(Game.X)
         self.assertEqual(game.board, expected)
