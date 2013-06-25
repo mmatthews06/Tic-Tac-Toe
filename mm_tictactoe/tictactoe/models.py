@@ -5,8 +5,7 @@ from random import randrange
 class ListField(models.CommaSeparatedIntegerField):
     """
     A simple field that makes an actual list out of the comma-separated
-    integers.  This is a custom class created by me.  There may be a better
-    way to do this, though...
+    integers.  This is a custom class created by me.
     """
     __metaclass__ = models.SubfieldBase
 
@@ -171,7 +170,7 @@ class Game(models.Model):
             self.board[self.CENTER] = player
             return False
 
-        # Fill in the corner caddy-corner to first corner 
+        # Fill in the corner caddy-corner to first corner
         if self.turn == 3 and self.sumAndSet(self.DIAG1, self.X+self.O, player):
             return False
         if self.turn == 3 and self.sumAndSet(self.DIAG2, self.X+self.O, player):

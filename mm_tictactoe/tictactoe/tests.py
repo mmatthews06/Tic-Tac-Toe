@@ -55,16 +55,22 @@ class TicTacToeTest(TestCase):
         self.assertEqual(filter(lambda x: x==0, game1.board), [])
         self.assertFalse(game1.checkWinner(game1.X))
         self.assertFalse(game1.checkWinner(game1.O))
+        self.assertEqual(sum(game1.board), 5*Game.X + 4*Game.O,
+            "Not all spaces are filled")
 
         game2 = self.__playGame()
         self.assertEqual(filter(lambda x: x==0, game2.board), [])
         self.assertFalse(game2.checkWinner(game2.X))
         self.assertFalse(game2.checkWinner(game2.O))
+        self.assertEqual(sum(game2.board), 5*Game.X + 4*Game.O,
+            "Not all spaces are filled")
 
         game3 = self.__playGame()
         self.assertEqual(filter(lambda x: x==0, game3.board), [])
         self.assertFalse(game3.checkWinner(game3.X))
         self.assertFalse(game3.checkWinner(game3.O))
+        self.assertEqual(sum(game3.board), 5*Game.X + 4*Game.O,
+            "Not all spaces are filled")
 
 
     def test_fillCornerAsFirstMove(self):
