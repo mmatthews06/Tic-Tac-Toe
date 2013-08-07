@@ -9,7 +9,7 @@ Usage:
 	pip install django
 2) Clone the readonly repo:
 	git clone git://github.com/mmatthews06/Tic-Tac-Toe.git
-3) Change into the new directory, and create a new database with this command:
+3) Change into the new directory, and create a new database:
 	cd Tic-Tac-Toe/mm_tictactoe
 	python manage.py syncdb
 4) Start the server thusly:
