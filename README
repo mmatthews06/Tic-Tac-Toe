@@ -1,10 +1,16 @@
 Tic Tac Toe
 
 Usage:
-1) Install django in the manner described here: https://www.djangoproject.com/download/.  For me, this was just 3 command line commands
+1) Install django in the manner described here: https://www.djangoproject.com/download/.  On my Mac, I ran these commands (see below for how to install virtualenv):
+	mkdir ttt_test
+	cd ttt_test
+	virtualenv tic-tac-toe_test
+	source tic-tac-toe_test/bin/activate
+	pip install django
 2) Clone the readonly repo:
 	git clone git://github.com/mmatthews06/Tic-Tac-Toe.git
 3) Change into the new directory, and create a new database with this command:
+	cd Tic-Tac-Toe/mm_tictactoe
 	python manage.py syncdb
 4) Start the server thusly:
 	python manage.py runserver
@@ -29,6 +35,16 @@ Quick Features List:
 - CSS gradients, and transitions
 - CSS animations (on webkit)
 - iPhone "Add to Home screen" functionality
+
+Installing VirtualEnv (on Mac OSX or Linux):
+The commands can be found here, and are reproduced below: https://pypi.python.org/pypi/virtualenv
+	$ curl -O https://pypi.python.org/packages/source/v/virtualenv/virtualenv-X.X.tar.gz
+	$ tar xvfz virtualenv-X.X.tar.gz
+	$ cd virtualenv-X.X
+	$ [sudo] python setup.py install 
+
+Installing on Windows requires a little more, because you have to install Python 2.7 first, and add the python executable to your PATH variable.  Unfortunately, these appear to be the most straightforward directions:
+https://zignar.net/2012/06/17/install-python-on-windows/ 
 
 For better or worse, right now the site is "optimized" for mobile browsers.  It looks decent in a desktop browser, but the controls are only reasonable for mobiles.  Please see the TODO list for more mobile optimizations to come, and one desktop TODO.
 
