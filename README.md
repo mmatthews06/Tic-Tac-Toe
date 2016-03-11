@@ -139,8 +139,8 @@ It appears that the number system is faster than the crude character win test he
 
 ##CREDITS
 Free icons came from here:
-iPhone Home screen app icon: http://ii-r4nd0m-w0lf-ii.deviantart.com/art/FREE-tic-tac-toe-icon-184091530
-New game wand: http://www.iconarchive.com/show/oxygen-icons-by-oxygen-icons.org/Actions-games-solve-icon.html
-Current game chess icon: http://www.iconarchive.com/show/black-and-blue-add-on-icons-by-icondrawer/black-chess-icon.html
-Home nave icon: http://www.iconarchive.com/show/oxygen-icons-by-oxygen-icons.org/Actions-go-home-icon.html
-Background: http://www.coxmediagroup.com/ (with a simple color modification)
+* iPhone Home screen app icon: http://ii-r4nd0m-w0lf-ii.deviantart.com/art/FREE-tic-tac-toe-icon-184091530
+* New game wand: http://www.iconarchive.com/show/oxygen-icons-by-oxygen-icons.org/Actions-games-solve-icon.html
+* Current game chess icon: http://www.iconarchive.com/show/black-and-blue-add-on-icons-by-icondrawer/black-chess-icon.html
+* Home nave icon: http://www.iconarchive.com/show/oxygen-icons-by-oxygen-icons.org/Actions-go-home-icon.html
+* Background: http://www.coxmediagroup.com/ (with a simple color modification)
