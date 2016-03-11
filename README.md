@@ -95,7 +95,7 @@ The first example seems more compact, as well.  There is probably a better solut
 	- AJAX timer to check for game requests from a different player, plus a heartbeat
 	- TODO: add to this list.
 
-##EXTRA
+##Performance Test
 The quick comparison tests that I ran to find a potential tictactoe win:
 ```python
 i = 100000
