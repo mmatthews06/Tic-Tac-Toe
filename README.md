@@ -1,21 +1,29 @@
 #Tic Tac Toe
 
 ##Setup and Usage
-1) Install django in the manner described here: https://www.djangoproject.com/download/.  On my Mac, I ran these commands (see below for how to install virtualenv):
-	mkdir ttt_test
-	cd ttt_test
-	virtualenv tic-tac-toe_test
-	source tic-tac-toe_test/bin/activate
-	pip install django
-2) Clone the readonly repo:
-	git clone git://github.com/mmatthews06/Tic-Tac-Toe.git
-3) Change into the new directory, and create a new database:
-	cd Tic-Tac-Toe/mm_tictactoe
-	python manage.py syncdb
-4) Start the server thusly:
-	python manage.py runserver
-5) Navigate to http://localhost:8000 in a browser (or host in a manner that would allow a mobile device to connect to the server)
-6) Play the game!
+1. Install django in the manner described here: https://www.djangoproject.com/download/.  On my Mac, I ran these commands (see below for how to install virtualenv):
+```bash
+mkdir ttt_test
+cd ttt_test
+virtualenv tic-tac-toe_test
+source tic-tac-toe_test/bin/activate
+pip install django
+```
+2. Clone the readonly repo:
+```bash
+git clone git://github.com/mmatthews06/Tic-Tac-Toe.git
+```
+3. Change into the new directory, and create a new database:
+```bash
+cd Tic-Tac-Toe/mm_tictactoe
+python manage.py syncdb
+```
+4. Start the server thusly:
+```bash
+python manage.py runserver
+```
+5. Navigate to http://localhost:8000 in a browser (or host in a manner that would allow a mobile device to connect to the server)
+6. Play the game!
 
 ##Tested on
 - Firefox 21: works (no animations)
@@ -38,10 +46,12 @@
 
 ##Installing VirtualEnv (on Mac OSX or Linux)
 The commands can be found here, and are reproduced below: https://pypi.python.org/pypi/virtualenv
+```bash
 	$ curl -O https://pypi.python.org/packages/source/v/virtualenv/virtualenv-X.X.tar.gz
 	$ tar xvfz virtualenv-X.X.tar.gz
 	$ cd virtualenv-X.X
 	$ [sudo] python setup.py install
+```
 
 Installing on Windows requires a little more, because you have to install Python 2.7 first, and add the python executable to your PATH variable.  Unfortunately, these appear to be the most straightforward directions:
 https://zignar.net/2012/06/17/install-python-on-windows/
@@ -51,14 +61,18 @@ For better or worse, right now the site is "optimized" for mobile browsers.  It 
 Additionally, the Tic Tac Toe game itself is actually persisted in a database between calls, as are the "Players" that "login."  This was intended to eventually support a two-player game, which I thought would be a good extra credit feature.  I've since taken it the mobile route, and am adding features there, but I will try the two player system later anyway.  "Players" do not have a password because I thought that would be tedious to evaluate, and the Django admin page is left off, because there isn't really much to administer.
 
 For the game itself, I went with an array of integers to represent the game board.  I felt like this was unique, and would allow for speedier algorithm execution, and potentially more compact, though probably more obscure, code.  For example, a quick performance test suggests that finding a potential winning Tic Tac Toe position like this:
-  t = [1,1,0]   # where 1 is 'x', and 0 is the empty spot that gets the win
-  if(sum(t) == 2)
-	# insert 1 where the 0 is found
+```python
+t = [1,1,0]   # where 1 is 'x', and 0 is the empty spot that gets the win
+if(sum(t) == 2)
+# insert 1 where the 0 is found
+```
 
-�is quicker than testing like this:
- t = ['x', 'x', None]
- if(t == ['x', 'x', None] or t == [None, 'x', 'x'] or t == ['x', None, 'x'])
-	# insert 'x' where None is found
+...is quicker than testing like this:
+```python
+t = ['x', 'x', None]
+if(t == ['x', 'x', None] or t == [None, 'x', 'x'] or t == ['x', None, 'x'])
+# insert 'x' where None is found
+```
 
 The first example seems more compact, as well.  There is probably a better solution than either of these, but I was happy with how it worked out.  See below for a real performance test that I did.
 
@@ -72,7 +86,7 @@ The first example seems more compact, as well.  There is probably a better solut
 	- Probably require unique player names.  Will try to avoid passwords, though.
 	- A way to clear out a player once they've timed out.
 	- AJAX timer to check for game requests from a different player, plus a heartbeat
-	- TODO: add to this list�
+	- TODO: add to this list.
 
 ##EXTRA
 The quick comparison tests that I ran to find a potential tictactoe win:
