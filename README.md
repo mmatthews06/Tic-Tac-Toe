@@ -14,7 +14,7 @@
 	```bash
 	git clone git://github.com/mmatthews06/Tic-Tac-Toe.git
 	```
-	
+
 3. Change into the new directory, and create a new database:
 	```bash
 	cd Tic-Tac-Toe/mm_tictactoe
@@ -94,6 +94,7 @@ The first example seems more compact, as well.  There is probably a better solut
 
 ##EXTRA
 The quick comparison tests that I ran to find a potential tictactoe win:
+```python
 i = 100000
 L = [['x','x',None],[None,'x', 'x'],['x','o',None],['o','o', None]] # winnable permutations
 wins = 0
@@ -103,13 +104,17 @@ while i:                                                            # find a win
             wins += 1
     i -= 1
 print wins
+```
 
-> time python chars.py
+```bash
+time python chars.py
 200000
 real	0m0.276s
 user	0m0.265s
 sys	0m0.010s
+```
 
+```python
 L = [[1,1,0],[0,1,1],[1,0,0],[0,0,1]] # winnable permutations
 wins = 0
 while i:			      # find a win
@@ -118,12 +123,14 @@ while i:			      # find a win
             wins += 1
     i -= 1
 print wins
-
-> time python nums.py
+```
+```bash
+time python nums.py
 200000
 real	0m0.185s
 user	0m0.173s
 sys	0m0.010s
+```
 
 It appears that the number system is faster than the crude character win test here.
 
