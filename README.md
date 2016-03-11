@@ -1,6 +1,6 @@
-Tic Tac Toe
+#Tic Tac Toe
 
-Usage:
+##Setup and Usage:
 1) Install django in the manner described here: https://www.djangoproject.com/download/.  On my Mac, I ran these commands (see below for how to install virtualenv):
 	mkdir ttt_test
 	cd ttt_test
@@ -17,7 +17,7 @@ Usage:
 5) Navigate to http://localhost:8000 in a browser (or host in a manner that would allow a mobile device to connect to the server)
 6) Play the game!
 
-Tested on:
+##Tested on:
 - Firefox 21: works (no animations)
 - Safari 5: works BEST (animations)
 - Mobile Safari (iPhone/iPad): works BEST (animations)
@@ -27,7 +27,7 @@ Tested on:
 - IE 9: works
 - IE 6: does not work
 
-Quick Features List:
+##Quick Features List:
 - Served by Django
 - HTML5 elements
 - jQuery work
@@ -36,15 +36,15 @@ Quick Features List:
 - CSS animations (on webkit)
 - iPhone "Add to Home screen" functionality
 
-Installing VirtualEnv (on Mac OSX or Linux):
+##Installing VirtualEnv (on Mac OSX or Linux):
 The commands can be found here, and are reproduced below: https://pypi.python.org/pypi/virtualenv
 	$ curl -O https://pypi.python.org/packages/source/v/virtualenv/virtualenv-X.X.tar.gz
 	$ tar xvfz virtualenv-X.X.tar.gz
 	$ cd virtualenv-X.X
-	$ [sudo] python setup.py install 
+	$ [sudo] python setup.py install
 
 Installing on Windows requires a little more, because you have to install Python 2.7 first, and add the python executable to your PATH variable.  Unfortunately, these appear to be the most straightforward directions:
-https://zignar.net/2012/06/17/install-python-on-windows/ 
+https://zignar.net/2012/06/17/install-python-on-windows/
 
 For better or worse, right now the site is "optimized" for mobile browsers.  It looks decent in a desktop browser, but the controls are only reasonable for mobiles.  Please see the TODO list for more mobile optimizations to come, and one desktop TODO.
 
@@ -55,14 +55,14 @@ For the game itself, I went with an array of integers to represent the game boar
   if(sum(t) == 2)
 	# insert 1 where the 0 is found
 
-Éis quicker than testing like this:
+ï¿½is quicker than testing like this:
  t = ['x', 'x', None]
  if(t == ['x', 'x', None] or t == [None, 'x', 'x'] or t == ['x', None, 'x'])
 	# insert 'x' where None is found
 
 The first example seems more compact, as well.  There is probably a better solution than either of these, but I was happy with how it worked out.  See below for a real performance test that I did.
 
-TODO:
+##TODO:
 - Still need slightly better looking win/loss/draw game ending dialog
 - Much better colors
 - More single page app functionality
@@ -72,7 +72,7 @@ TODO:
 	- Probably require unique player names.  Will try to avoid passwords, though.
 	- A way to clear out a player once they've timed out.
 	- AJAX timer to check for game requests from a different player, plus a heartbeat
-	- TODO: add to this listÉ
+	- TODO: add to this listï¿½
 
 EXTRA:
 The quick comparison tests that I ran to find a potential tictactoe win:
@@ -86,7 +86,7 @@ while i:                                                            # find a win
     i -= 1
 print wins
 
-> time python chars.py 
+> time python chars.py
 200000
 real	0m0.276s
 user	0m0.265s
@@ -101,7 +101,7 @@ while i:			      # find a win
     i -= 1
 print wins
 
-> time python nums.py 
+> time python nums.py
 200000
 real	0m0.185s
 user	0m0.173s
