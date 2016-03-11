@@ -1,6 +1,6 @@
 #Tic Tac Toe
 
-##Setup and Usage:
+##Setup and Usage
 1) Install django in the manner described here: https://www.djangoproject.com/download/.  On my Mac, I ran these commands (see below for how to install virtualenv):
 	mkdir ttt_test
 	cd ttt_test
@@ -17,7 +17,7 @@
 5) Navigate to http://localhost:8000 in a browser (or host in a manner that would allow a mobile device to connect to the server)
 6) Play the game!
 
-##Tested on:
+##Tested on
 - Firefox 21: works (no animations)
 - Safari 5: works BEST (animations)
 - Mobile Safari (iPhone/iPad): works BEST (animations)
@@ -27,7 +27,7 @@
 - IE 9: works
 - IE 6: does not work
 
-##Quick Features List:
+##Quick Features List
 - Served by Django
 - HTML5 elements
 - jQuery work
@@ -36,7 +36,7 @@
 - CSS animations (on webkit)
 - iPhone "Add to Home screen" functionality
 
-##Installing VirtualEnv (on Mac OSX or Linux):
+##Installing VirtualEnv (on Mac OSX or Linux)
 The commands can be found here, and are reproduced below: https://pypi.python.org/pypi/virtualenv
 	$ curl -O https://pypi.python.org/packages/source/v/virtualenv/virtualenv-X.X.tar.gz
 	$ tar xvfz virtualenv-X.X.tar.gz
@@ -62,7 +62,7 @@ For the game itself, I went with an array of integers to represent the game boar
 
 The first example seems more compact, as well.  There is probably a better solution than either of these, but I was happy with how it worked out.  See below for a real performance test that I did.
 
-##TODO:
+##TODO
 - Still need slightly better looking win/loss/draw game ending dialog
 - Much better colors
 - More single page app functionality
@@ -74,7 +74,7 @@ The first example seems more compact, as well.  There is probably a better solut
 	- AJAX timer to check for game requests from a different player, plus a heartbeat
 	- TODO: add to this list�
 
-EXTRA:
+##EXTRA
 The quick comparison tests that I ran to find a potential tictactoe win:
 i = 100000
 L = [['x','x',None],[None,'x', 'x'],['x','o',None],['o','o', None]] # winnable permutations
@@ -109,7 +109,7 @@ sys	0m0.010s
 
 It appears that the number system is faster than the crude character win test here.
 
-CREDITS:
+##CREDITS
 Free icons came from here:
 iPhone Home screen app icon: http://ii-r4nd0m-w0lf-ii.deviantart.com/art/FREE-tic-tac-toe-icon-184091530
 New game wand: http://www.iconarchive.com/show/oxygen-icons-by-oxygen-icons.org/Actions-games-solve-icon.html
