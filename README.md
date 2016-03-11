@@ -1,4 +1,7 @@
 #Tic Tac Toe
+This is a full stack implementation of a single-player Tic-Tac-Toe game, written using the Python Django framework for the backend, and mostly just jQuery and LESS.
+
+Most of this code was written way back in 2011, and I have used my time since then on very different projects, but there may be an effort to spruce it up with some Angular or Backbone, and some Bootstrap.
 
 ##Setup and Usage
 1. Install django in the manner described here: https://www.djangoproject.com/download/.  On my Mac, I ran these commands (see below for how to install virtualenv):
