@@ -2,26 +2,30 @@
 
 ##Setup and Usage
 1. Install django in the manner described here: https://www.djangoproject.com/download/.  On my Mac, I ran these commands (see below for how to install virtualenv):
-```bash
-mkdir ttt_test
-cd ttt_test
-virtualenv tic-tac-toe_test
-source tic-tac-toe_test/bin/activate
-pip install django
-```
+	```bash
+	mkdir ttt_test
+	cd ttt_test
+	virtualenv tic-tac-toe_test
+	source tic-tac-toe_test/bin/activate
+	pip install django
+	```
+
 2. Clone the readonly repo:
-```bash
-git clone git://github.com/mmatthews06/Tic-Tac-Toe.git
-```
+	```bash
+	git clone git://github.com/mmatthews06/Tic-Tac-Toe.git
+	```
+	
 3. Change into the new directory, and create a new database:
-```bash
-cd Tic-Tac-Toe/mm_tictactoe
-python manage.py syncdb
-```
+	```bash
+	cd Tic-Tac-Toe/mm_tictactoe
+	python manage.py syncdb
+	```
+
 4. Start the server thusly:
-```bash
-python manage.py runserver
-```
+	```bash
+	python manage.py runserver
+	```
+
 5. Navigate to http://localhost:8000 in a browser (or host in a manner that would allow a mobile device to connect to the server)
 6. Play the game!
 
@@ -47,10 +51,10 @@ python manage.py runserver
 ##Installing VirtualEnv (on Mac OSX or Linux)
 The commands can be found here, and are reproduced below: https://pypi.python.org/pypi/virtualenv
 ```bash
-	$ curl -O https://pypi.python.org/packages/source/v/virtualenv/virtualenv-X.X.tar.gz
-	$ tar xvfz virtualenv-X.X.tar.gz
-	$ cd virtualenv-X.X
-	$ [sudo] python setup.py install
+curl -O https://pypi.python.org/packages/source/v/virtualenv/virtualenv-X.X.tar.gz
+tar xvfz virtualenv-X.X.tar.gz
+cd virtualenv-X.X
+[sudo] python setup.py install
 ```
 
 Installing on Windows requires a little more, because you have to install Python 2.7 first, and add the python executable to your PATH variable.  Unfortunately, these appear to be the most straightforward directions:
