@@ -1,3 +1,6 @@
 *.pyc
 *.swp
 *.sqlite3
+venv/
+mm_tictactoe/node_modules/
+mm_tictactoe/static/style.css

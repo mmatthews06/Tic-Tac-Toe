@@ -1,0 +1,24 @@
+{
+  "name": "mm_tictactoe",
+  "version": "0.9.0",
+  "description": "A Tic-Tac-Toe game using Django for the backend, and several different libraries for the frontend.",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "browser-sync": "^2.11.2",
+    "del": "^2.2.0",
+    "gulp": "^3.9.1",
+    "gulp-if": "^2.0.0",
+    "gulp-jshint": "^2.0.0",
+    "gulp-less": "^3.0.5",
+    "gulp-notify": "^2.2.0",
+    "jshint": "^2.9.1",
+    "jshint-stylish": "^2.1.0",
+    "watchify": "^3.7.0",
+    "yargs": "^4.4.0"
+  }
+}
