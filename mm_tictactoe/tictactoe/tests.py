@@ -191,5 +191,3 @@ class TicTacToeTest(TestCase):
 
         game.nextTurn(Game.X)
         self.assertEqual(game.board, expected)
-
-

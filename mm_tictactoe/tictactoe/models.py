@@ -53,6 +53,7 @@ class Game(models.Model):
     CENTER = 4                  # Board's center index
     CORNERS = (0,2,6,8)         # Board's corners
     EDGES = (1,3,5,7)           # Board's edges
+
     player1 = models.ForeignKey(Player, related_name='player1')
     player2 = models.ForeignKey(Player, null=True, related_name='player2')
     winner = models.ForeignKey(Player, null=True, related_name='winner')
@@ -80,7 +81,7 @@ class Game(models.Model):
         self.board[index] = player
 
     def makeMove(self, player, gridIndex):
-        playerChar = self.O if player is self.player1 else self.X
+        playerChar = self.O if player == self.player1 else self.X
         otherPlayerChar = self.X if playerChar == self.O else self.O
 
         self.playerTurn(playerChar, gridIndex)
@@ -139,9 +140,8 @@ class Game(models.Model):
         # Pick a random corner if this is the beginning
         self.turn += 1
         if self.turn == 1:
-            cornerIndexes = (0, 2, 6, 8)
             i = randrange(0, 3, 1)
-            self.board[cornerIndexes[i]] = player
+            self.board[self.CORNERS[i]] = player
             return False
         elif self.turn >= 10:
             # TODO: This should probably throw an error...
@@ -250,6 +250,7 @@ class Game(models.Model):
                 else:
                     self.board[pos2] = player
                     return True
+
         return False
 
     def forkablePositions(self, player):

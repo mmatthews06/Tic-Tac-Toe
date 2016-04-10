@@ -97,21 +97,21 @@ nav#controls {
         z-index:1000;
     }
     #navHome {
-        background-image: url(/site_media/Actions-go-home-icon.png);
+        background-image: url(/static/Actions-go-home-icon.png);
     }
     #navHome:hover:after {
         content: "Home";
         .nav_hover;
     }
     #navNewGame {
-        background-image: url(/site_media/Actions-games-solve-icon.png);
+        background-image: url(/static/Actions-games-solve-icon.png);
     }
     #navNewGame:hover:after {
         content: "New Game";
         .nav_hover;
     }
     #navCurGame {
-        background-image: url(/site_media/black-chess-icon.png);
+        background-image: url(/static/black-chess-icon.png);
     }
     #navCurGame:hover:after {
         content: "Current Game";
@@ -119,7 +119,7 @@ nav#controls {
     }
 
     #navHome.selected {
-        background-image: url(/site_media/Actions-go-home-icon.png),
+        background-image: url(/static/Actions-go-home-icon.png),
             -webkit-gradient(
                 linear,
                 0% 0%,
@@ -128,7 +128,7 @@ nav#controls {
                 to(@darkColor),
                 color-stop(.5,@middleColor)
             );
-        background-image: url(/site_media/Actions-go-home-icon.png),
+        background-image: url(/static/Actions-go-home-icon.png),
             -moz-linear-gradient(
                 top,
                 @darkColor,
@@ -138,7 +138,7 @@ nav#controls {
     }
 
     #navNewGame.selected {
-        background-image: url(/site_media/Actions-games-solve-icon.png),
+        background-image: url(/static/Actions-games-solve-icon.png),
             -webkit-gradient(
                 linear,
                 0% 0%,
@@ -147,7 +147,7 @@ nav#controls {
                 to(@darkColor),
                 color-stop(.5,@middleColor)
             );
-        background-image: url(/site_media/Actions-games-solve-icon.png),
+        background-image: url(/static/Actions-games-solve-icon.png),
             -moz-linear-gradient(
                 top,
                 @darkColor,
@@ -157,7 +157,7 @@ nav#controls {
     }
 
     #navCurGame.selected {
-        background-image: url(/site_media/black-chess-icon.png),
+        background-image: url(/static/black-chess-icon.png),
             -webkit-gradient(
                 linear,
                 0% 0%,
@@ -166,7 +166,7 @@ nav#controls {
                 to(@darkColor),
                 color-stop(.5,@middleColor)
             );
-        background-image: url(/site_media/black-chess-icon.png),
+        background-image: url(/static/black-chess-icon.png),
             -moz-linear-gradient(
                 top,
                 @darkColor,
@@ -251,13 +251,13 @@ table#gameBoard tr td {
 }
 
 div.x {
-    background: url('/site_media/x.png');
+    background: url('/static/x.png');
     height: 90px;
     width: 90px;
 }
 
 div.o {
-    background: url('/site_media/o.png');
+    background: url('/static/o.png');
     height: 90px;
     width: 90px;
 }

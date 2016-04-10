@@ -91,6 +91,7 @@ function unbindBlanks() {
 function markNewPiece($gamePiece, piece) {
     $gamePiece.hide()
         .unbind('click');
+
     switch (piece) {
         case X_PIECE:
             $gamePiece.attr('class', 'x');
@@ -99,11 +100,13 @@ function markNewPiece($gamePiece, piece) {
             $gamePiece.attr('class', 'o');
             break;
     }
+
     $gamePiece.fadeIn({duration:200});
 }
 
 function requestNewGame() {
     $('#content').unbind('click');
+
     $.ajax({
         type: "POST",
         url: "/newGameJAX/",

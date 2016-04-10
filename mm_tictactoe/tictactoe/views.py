@@ -1,12 +1,14 @@
 # Create your views here.
 from datetime import datetime
+import json
 import random
 
+
+#from django.shortcuts import rende
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.contrib import messages
-from django.utils import simplejson
 
 from models import Player, Game
 
@@ -26,21 +28,23 @@ def login(request):
     game = __setupNewGame(player)
     player.save()
     game.save()
-    request.session['player'] = player
-    request.session['game'] = game
+    #request.session['player'] = player
+    #request.session['game'] = game
+    request.session['player'] = player.id
+    request.session['game'] = game.id
     return HttpResponseRedirect('/game/')
 
 def newGameJAX(request):
     if 'player' not in request.session:
         return HttpResponseRedirect('/home/')
 
-    player = request.session['player']
+    player = Player.objects.get(pk=request.session['player'])
     game = __setupNewGame(player)
     game.save()
-    request.session['game'] = game
+    request.session['game'] = game.id
     response = { 'board': game.board, 'ended': False }
-    serialized = simplejson.dumps(response)
-    return HttpResponse(serialized, mimetype="application/json")
+    serialized = json.dumps(response)
+    return HttpResponse(serialized, content_type="application/json")
 
 def game(request):
     if 'player' not in request.session:
@@ -64,11 +68,17 @@ def gameJAX(request):
                  'wins': player.wins,
                  'losses': player.losses,
                  'draws': player.draws}
-    serialized = simplejson.dumps(response)
-    return HttpResponse(serialized, mimetype="application/json")
+    #serialized = simplejson.dumps(response)
+    serialized = json.dumps(response)
+    return HttpResponse(serialized, content_type="application/json")
 
 def __setupNewGame(player):
     game = Game(player1=player)
+    # The line below is needed due to some bug that
+    # happens after upgrading to Django 1.9, where
+    # after a few games the first index is initialized
+    # with a 1. Try to investigate later.
+    game.board = [0,0,0,0,0,0,0,0,0]
 
     # Randomize whether computer starts, or player
     if random.randint(1,2) == 1:
@@ -77,8 +87,10 @@ def __setupNewGame(player):
     return game
 
 def __gameMove(request):
-    game = request.session['game']
-    player = request.session['player']
+    #game = request.session['game']
+    #player = request.session['player']
+    game = Game.objects.get(pk=request.session['game'])
+    player = Player.objects.get(pk=request.session['player'])
     player.lastActive = datetime.now()
 
     endState = None
@@ -86,12 +98,11 @@ def __gameMove(request):
         gridIndex = int(request.POST['gridIndex'])
         endState = game.makeMove(player, gridIndex);
 
-
     game.save()
-    request.session['game'] = game
+    #request.session['game'] = game
+    request.session['game'] = game.id
 
     player.save()
-    request.session['player'] = player
+    #request.session['player'] = player
+    request.session['player'] = player.id
     return request, game, player, endState
-
-
