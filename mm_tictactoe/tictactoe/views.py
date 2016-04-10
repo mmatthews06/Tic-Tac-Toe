@@ -74,6 +74,11 @@ def gameJAX(request):
 
 def __setupNewGame(player):
     game = Game(player1=player)
+    # The line below is needed due to some bug that
+    # happens after upgrading to Django 1.9, where
+    # after a few games the first index is initialized
+    # with a 1. Try to investigate later.
+    game.board = [0,0,0,0,0,0,0,0,0]
 
     # Randomize whether computer starts, or player
     if random.randint(1,2) == 1:
@@ -92,7 +97,6 @@ def __gameMove(request):
     if not game.ended and request.method == 'POST':
         gridIndex = int(request.POST['gridIndex'])
         endState = game.makeMove(player, gridIndex);
-
 
     game.save()
     #request.session['game'] = game

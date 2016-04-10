@@ -116,7 +116,7 @@ gulp.task('browser-sync', function() {
 gulp.task('reload-less', ['less'], function(){
   browserSync.reload();
 });
-gulp.task('reload-js', ['browserify'], function(){
+gulp.task('reload-js', [], function(){
   browserSync.reload();
 });
 gulp.task('reload-templates', ['templates'], function(){
