@@ -3,6 +3,8 @@ This is a full stack implementation of a single-player Tic-Tac-Toe game, written
 
 Most of this code was written way back in 2011, and I have used my time since then on very different projects, but there may be an effort to spruce it up with some Angular or Backbone, and some Bootstrap.
 
+NOTE: This project has now been updated to use with Django 1.9.x.
+
 ##Setup and Usage
 1. Install django in the manner described here: https://www.djangoproject.com/download/.  On my Mac, I ran these commands (see below for how to install virtualenv):
 	```bash
