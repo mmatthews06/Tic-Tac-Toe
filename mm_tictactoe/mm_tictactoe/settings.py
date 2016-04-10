@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'tictactoe'
+    'tictactoe',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -126,4 +126,5 @@ STATIC_URL = '/static/'
 # Start of personal modifications.
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
+    os.path.join(BASE_DIR, "bower_components"),
 ]

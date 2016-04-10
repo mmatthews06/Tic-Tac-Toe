@@ -1,0 +1,21 @@
+{
+  "name": "mm_tictactoe",
+  "description": "A Tic-Tac-Toe game using Django for the backend, and several different libraries for the frontend.",
+  "main": "gulpfile.js",
+  "authors": [
+    "mmatthews06 <mmatthews06@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/mmatthews06/Tic-Tac-Toe_original",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.6"
+  }
+}
